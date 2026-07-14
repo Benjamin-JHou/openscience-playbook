@@ -1,8 +1,8 @@
-# 开放科学与 AI 科学家使用指南 (Open Science & AI-Scientist Playbook)
+# AI-Scientist Playbook
 
 [English](README.md) | [简体中文](README_zh.md) | [Français](README_fr.md) | [日本語](README_ja.md) | [한국어](README_ko.md) | [Español](README_es.md)
 
-欢迎来到 **开放科学与 AI 科学家使用指南 (Open Science & AI-Scientist Playbook)**！这是一份精心整理的综合性指南，详细介绍了目前领先的开源 AI 科学家工作台与本地优先的科研平台。其中包含资源汇总、详细的安装指南、常见问答（Q&A）以及高级优化技巧，旨在帮助科研人员利用 AI 提升科研效率。
+欢迎来到 **AI-Scientist Playbook**！这是一份精心整理的综合性指南，详细介绍了目前领先的开源 AI 科学家（AI-Scientist）工作台与本地优先的科研平台。其中包含资源汇总、详细的安装指南、常见问答（Q&A）以及高级优化技巧，旨在帮助科研人员利用 AI 提升科研效率。
 
 ---
 

@@ -1,8 +1,8 @@
-# Playbook Open Science & AI-Scientist
+# Playbook AI-Scientist
 
 [English](README.md) | [简体中文](README_zh.md) | [Français](README_fr.md) | [日本語](README_ja.md) | [한국어](README_ko.md) | [Español](README_es.md)
 
-Bienvenue dans le **Playbook Open Science & AI-Scientist** ! Il s'agit d'un guide complet et sélectionné détaillant les principaux environnements de travail d'IA scientifique open-source et les plateformes de recherche locales. Il comprend des répertoires de ressources, des guides d'installation étape par étape, des FAQ courantes et des optimisations avancées pour vous aider à propulser votre recherche scientifique avec l'IA.
+Bienvenue dans le **Playbook AI-Scientist** ! Il s'agit d'un guide complet et sélectionné détaillant les principaux environnements de travail d'IA-Scientist open-source et les plateformes de recherche locales. Il comprend des répertoires de ressources, des guides d'installation étape par étape, des FAQ courantes et des optimisations avancées pour vous aider à propulser votre recherche scientifique avec l'IA.
 
 ---
 

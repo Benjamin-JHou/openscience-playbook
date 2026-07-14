@@ -1,8 +1,8 @@
-# Open Science & AI-Scientist Playbook
+# AI-Scientist Playbook
 
 [English](README.md) | [简体中文](README_zh.md) | [Français](README_fr.md) | [日本語](README_ja.md) | [한국어](README_ko.md) | [Español](README_es.md)
 
-Welcome to the **Open Science & AI-Scientist Playbook**! This is a curated, comprehensive guide detailing the leading open-source AI scientist workbenches and local-first research platforms. It features resource directories, step-by-step installation guides, common FAQs, and advanced optimizations to help you supercharge your scientific research with AI.
+Welcome to the **AI-Scientist Playbook**! This is a curated, comprehensive guide detailing the leading open-source AI-scientist workbenches and local-first research platforms. It features resource directories, step-by-step installation guides, common FAQs, and advanced optimizations to help you supercharge your scientific research with AI.
 
 ---
 

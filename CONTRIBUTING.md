@@ -1,6 +1,6 @@
-# Contributing to the Open Science & AI-Scientist Playbook
+# Contributing to the AI-Scientist Playbook
 
-Thank you for your interest in contributing to the **Open Science & AI-Scientist Playbook**! We welcome contributions from researchers, software developers, AI practitioners, and students. By contributing, you help make AI-driven scientific discovery more accessible and robust for everyone.
+Thank you for your interest in contributing to the **AI-Scientist Playbook**! We welcome contributions from researchers, software developers, AI practitioners, and students. By contributing, you help make AI-driven scientific discovery more accessible and robust for everyone.
 
 ---
 
