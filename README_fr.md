@@ -125,8 +125,8 @@ Oui. Comme ces plateformes sont indépendantes du modèle et prennent en charge 
 
 ### 1. Optimisation des coûts et des niveaux de modèle
 L'exécution de boucles de recherche autonomes et approfondies peut devenir coûteuse. Optimisez votre stratégie de modèle comme suit :
-- **Filtrage & Recherche initiale** : Utilisez des modèles rentables et à haut débit comme `deepseek-chat` (DeepSeek-V3) ou des modèles locaux open-weight pour l'analyse initiale de la littérature, le filtrage des mots-clés et l'orientation des recherches.
-- **Synthèse & Rédaction** : Passez à des modèles frontières à haute intelligence comme `claude-3-5-sonnet` ou `gpt-4o` pour le raisonnement approfondi, la rédaction du manuscrit final et l'audit structuré.
+- **Recherche initiale, ingestion & routage** : Utilisez des modèles "Flash" et "Mini" de pointe et très rentables. Par exemple, utilisez **Gemini 2.5 Flash** (idéal pour assimiler la littérature à grand contexte et les PDF grâce à sa fenêtre de 1M+ tokens) ou **GPT-4o mini** et **Claude 3.5 Haiku** pour l'orchestration de sous-agents à haut débit, l'extraction de mots-clés et le routage des flux de travail.
+- **Synthèse & Rédaction** : Passez à des modèles frontières à haute intelligence comme **Claude 3.5 Sonnet** ou **GPT-4o** uniquement pour le raisonnement approfondi final, la rédaction du manuscrit final ou l'exécution d'audits structurés.
 
 ### 2. Outils personnalisés avec MCP
 Tirez parti du **Model Context Protocol (MCP)** pour connecter directement les plateformes à vos systèmes de fichiers locaux, vos serveurs de bases de données personnalisés ou vos clusters de calcul. Vous pouvez écrire de simples scripts Python ou Node.js à l'aide du SDK MCP pour permettre à l'IA scientifique d'interroger en toute sécurité votre base de données de notes de laboratoire privée.

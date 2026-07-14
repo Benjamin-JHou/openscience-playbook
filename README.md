@@ -125,8 +125,8 @@ Yes. Because these platforms are model-agnostic and support standard API endpoin
 
 ### 1. Cost & Model Tier Optimization
 Running deep autonomous research loops can get expensive. Optimize your model strategy as follows:
-- **Filtering & Initial Search**: Use cost-effective, high-throughput models like `deepseek-chat` (DeepSeek-V3) or local open-weight models for initial literature parsing, keyword filtering, and search routing.
-- **Synthesizing & Writing**: Swap to high-intelligence frontier models like `claude-3-5-sonnet` or `gpt-4o` for deep reasoning, writing the final manuscript, and structured auditing.
+- **Initial Search, Ingestion & Routing**: Use highly cost-effective, state-of-the-art "Flash" and "Mini" models. For example, use **Gemini 2.5 Flash** (ideal for digesting large-context literature and PDFs due to its 1M+ token window) or **GPT-4o mini** and **Claude 3.5 Haiku** for high-throughput sub-agent orchestration, keyword extraction, and workflow routing.
+- **Synthesizing & Writing**: Swap to high-intelligence frontier models like **Claude 3.5 Sonnet** or **GPT-4o** only when performing final deep reasoning, writing the final manuscript, or executing structured auditing.
 
 ### 2. Custom Tooling with MCP
 Leverage the **Model Context Protocol (MCP)** to connect the platforms directly to your local file systems, custom database servers, or computing clusters. You can write simple Python or Node.js scripts using the MCP SDK to let the AI scientist query your private lab notebook database safely.

@@ -125,8 +125,8 @@ Sí. Dado que las plataformas son independientes del modelo y admiten puntos de 
 
 ### 1. Estrategia de modelos y control de costos
 Ejecutar flujos autónomos prolongados de investigación puede elevar el consumo de API. Sugerimos la siguiente segmentación de modelos:
-- **Etapa de filtrado y búsqueda preliminar**: Utiliza modelos de alta velocidad y bajo costo como `deepseek-chat` (DeepSeek-V3) o modelos locales de código abierto para catalogar artículos, extraer palabras clave y clasificar tareas.
-- **Etapa de síntesis y redacción académica**: Cambia a modelos de inteligencia avanzada como `claude-3-5-sonnet` o `gpt-4o` al escribir el documento final, realizar razonamientos lógicos o auditorías estructuradas.
+- **Búsqueda preliminar, ingesta y enrutamiento**: Utiliza modelos "Flash" y "Mini" de última generación que sean sumamente rentables. Por ejemplo, utiliza **Gemini 2.5 Flash** (ideal para procesar textos de gran tamaño y PDF gracias a su ventana de contexto de más de 1M de tokens) o **GPT-4o mini** y **Claude 3.5 Haiku** para la coordinación de subagentes de alta velocidad, extracción de palabras clave y enrutamiento de flujos de trabajo.
+- **Síntesis y redacción académica**: Cambia a modelos de inteligencia de frontera como **Claude 3.5 Sonnet** o **GPT-4o** únicamente para realizar razonamientos profundos finales, redactar el manuscrito final o ejecutar auditorías estructuradas.
 
 ### 2. Integración de herramientas mediante MCP
 Utiliza **Model Context Protocol (MCP)** para vincular estas plataformas con tu sistema de archivos local, bases de datos internas o clústeres de cómputo. Mediante el SDK de MCP puedes crear scripts sencillos en Python o Node.js que permitan a los agentes consultar tus registros de laboratorio privados de manera segura.
