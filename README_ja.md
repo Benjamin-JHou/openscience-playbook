@@ -16,7 +16,7 @@
 | **Runcell Science** | [runcell-ai](https://github.com/runcell-ai) | [runcell-science](https://github.com/runcell-ai/runcell-science) | ローカル環境, React | 活発 | マルチエンジン (Claude Code/Codex等) |
 | **AutoResearchClaw** | [aiming-lab](https://github.com/aiming-lab) | [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw) | Python, CLI | 活発 | 標準化評価 / 自動実行 |
 | **Dr. Claw** | [OpenLAIR](https://github.com/OpenLAIR) | [dr-claw](https://github.com/OpenLAIR/dr-claw) | ローカルIDEエージェント | 活発 | コード集中型バイオ / 医学研究 |
-| **The AI Scientist** | [Sakana AI](https://sakana.ai) | [AI-Scientist](https://github.com/SakanaAI/AI-Scientist) / [v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python, PyTorch | 学術研究 | 機械学習 / AI研究 |
+| **[The AI Scientist](https://github.com/SakanaAI/AI-Scientist)** | [Sakana AI](https://sakana.ai) | [AI-Scientist](https://github.com/SakanaAI/AI-Scientist) / [v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python, PyTorch | 学術研究 | 機械学習 / AI研究 |
 
 ---
 
@@ -84,28 +84,28 @@ Tauri上に構築された、ローカルファーストかつモデルアグノ
 
 | エージェント / ツール名称 | 開発元 | リリース | コア位置づけ | デプロイ方式 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Claude Science** | Anthropic | 2026.6 | 汎用科学研究AIワークスペース | ローカル (macOS/Linux) + クラウド |
-| **Omic (Omic AI)** | Omic AI | 2025 | バイオ超知能 / 創薬 | SaaS + オンプレミス私有化 |
-| **Biomni** | スタンフォード大 (華人チーム) | 2026.7 | 汎用バイオ医学エージェント | Claude Platform, エンタープライズ |
-| **ScienceOS** | 個人開発者 | 2025.8 | 文献調査エージェント | SaaS クラウド |
-| **The AI Scientist** | Sakana AI (日本) | 2024.8 | 全自動エンドツーエンド科学発見 | オープンソース, Python (GitHub) |
-| **Co-Scientist** | Google DeepMind | 2026.5 | 複数エージェントによる仮説生成 | Gemini for Science (要申請) |
-| **EvoScientist** | 個人開発者 | 2026.3 | 自己進化マルチエージェント科学 | オープンソース (Apache 2.0), PyPI |
-| **Agent Laboratory** | AMD + ジョンズホプキンス | 2025.1 | 自律的科学研究フレームワーク | オープンソース (CPU/GPU対応) |
-| **BioNeMo Agent Toolkit** | NVIDIA | 2026.6 | ライフサイエンスエージェントツール | NVIDIA NIM (クラウドまたはローカル) |
-| **LUMI-lab** | トロント大学 | 2025.2 | AI自律物理実験室 (mRNA) | 物理ラボのハードウェア統合 |
-| **Autoscience** | Autoscience | 2026.3 | 自律AI研究ラボ | 企業向けマネージドサービス |
-| **OmicOS Science** | 国内チーム | 2026.7 | ゲノム分析 / AIワークベンチ | App Store (ローカル + クラウド) |
-| **SciMaster** | 深勢科技 + 上海交大 | 2025.7 | 汎用科学研究エージェント | Bohr Platform (SaaS + 私有デプロイ) |
-| **MolClaw** | 上海AIラボ + 北京大 | 2026.5 | 創薬スクリーニングエージェント | 大学連携デプロイ |
-| **Yayi AI-Scientist** | 中科聞歌 + 中科院 | 2025.7 | 文献調査アシスタント | SaaSプラットフォーム |
-| **MoleculeOS (MOS)** | 分子之心 | 2026.7 | AIバイオ研究開発OS | エンタープライズプラットフォーム |
-| **MindSpore Science Agent**| ファーウェイ | 2026.4 | 科学研究エージェントシステム | オープンソース, MindSpore基盤 |
-| **ElementsClaw** | アリババ達摩院 + 国科大 | 2026.7 | 超伝導材料発見エージェント | オープンデータベース / 予測 |
-| **Pangshi Agent Factory** | 中科院 | 2025.11 | 研究エージェント生成プラットフォーム| 中科院Pangshiプラットフォーム |
+| **[Claude Science](https://www.anthropic.com/claude)** | Anthropic | 2026.6 | 汎用科学研究AIワークスペース | ローカル (macOS/Linux) + クラウド |
+| **[Omic (Omic AI)](https://omic.ai/)** | Omic AI | 2025 | バイオ超知能 / 創薬 | SaaS + オンプレミス私有化 |
+| **[Biomni](https://biomni.stanford.edu)** | スタンフォード大 (華人チーム) | 2026.7 | 汎用バイオ医学エージェント | Claude Platform, エンタープライズ |
+| **[ScienceOS](https://scienceos.ai/)** | 個人開発者 | 2025.8 | 文献調査エージェント | SaaS クラウド |
+| **[The AI Scientist](https://github.com/SakanaAI/AI-Scientist)** | Sakana AI (日本) | 2024.8 | 全自動エンドツーエンド科学発見 | オープンソース, Python (GitHub) |
+| **[Co-Scientist](https://deepmind.google/discover/blog/introducing-co-scientist-using-ai-agents-for-scientific-hypothesis-generation/)** | Google DeepMind | 2026.5 | 複数エージェントによる仮説生成 | Gemini for Science (要申請) |
+| **[EvoScientist](https://github.com/EvoScientist/EvoScientist)** | 個人開発者 | 2026.3 | 自己進化マルチエージェント科学 | オープンソース (Apache 2.0), PyPI |
+| **[Agent Laboratory](https://github.com/SamuelSchmidgall/AgentLaboratory)** | AMD + ジョンズホプキンス | 2025.1 | 自律的科学研究フレームワーク | オープンソース (CPU/GPU対応) |
+| **[BioNeMo Agent Toolkit](https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit)** | NVIDIA | 2026.6 | ライフサイエンスエージェントツール | NVIDIA NIM (クラウドまたはローカル) |
+| **[LUMI-lab](https://pharmacy.utoronto.ca/bowen-li)** | トロント大学 | 2025.2 | AI自律物理実験室 (mRNA) | 物理ラボのハードウェア統合 |
+| **[Autoscience](https://www.autoscience.ai/)** | Autoscience | 2026.3 | 自律AI研究ラボ | 企業向けマネージドサービス |
+| **[OmicOS Science](https://github.com/omicverse)** | 国内チーム | 2026.7 | ゲノム分析 / AIワークベンチ | App Store (ローカル + クラウド) |
+| **[SciMaster](https://scimaster.bohrium.com/)** | 深勢科技 + 上海交大 | 2025.7 | 汎用科学研究エージェント | Bohr Platform (SaaS + 私有デプロイ) |
+| **[MolClaw](https://github.com/InternScience/MolClaw)** | 上海AIラボ + 北京大 | 2026.5 | 創薬スクリーニングエージェント | 大学連携デプロイ |
+| **[Yayi AI-Scientist](https://yayi.wenge.com)** | 中科聞歌 + 中科院 | 2025.7 | 文献調査アシスタント | SaaSプラットフォーム |
+| **[MoleculeOS (MOS)](https://mos.moleculemind.com/login)** | 分子之心 | 2026.7 | AIバイオ研究開発OS | エンタープライズプラットフォーム |
+| **[MindSpore Science Agent](https://github.com/mindspore-ai/mindscience)**| ファーウェイ | 2026.4 | 科学研究エージェントシステム | オープンソース, MindSpore基盤 |
+| **[ElementsClaw](https://arxiv.org/abs/2604.23758)** | アリババ達摩院 + 国科大 | 2026.7 | 超伝導材料発見エージェント | オープンデータベース / 予測 |
+| **[Pangshi Agent Factory](https://scienceone.cn/)** | 中科院 | 2025.11 | 研究エージェント生成プラットフォーム| 中科院Pangshiプラットフォーム |
 | **「大聖」科学エージェント** | SAIS + 復旦大学 | 2026.3 | 自律的システム級科学エージェント | 星河啓智プラットフォーム |
-| **BioMedAgent** | アカデミックチーム | 2026.4 | バイオ医学データ分析エージェント | 学術成果、再現可能 |
-| **OmicsClaw** | 清華大 AI4Life Lab | 2026.3 | マルチオミクスAIエージェント | Dockerデプロイ (OpenClawベース) |
+| **[BioMedAgent](https://github.com/BOBQWERA/BioMedAgent)** | アカデミックチーム | 2026.4 | バイオ医学データ分析エージェント | 学術成果、再現可能 |
+| **[OmicsClaw](https://github.com/TianGzlab/OmicsClaw)** | 清華大 AI4Life Lab | 2026.3 | マルチオミクスAIエージェント | Dockerデプロイ (OpenClawベース) |
 
 ---
 

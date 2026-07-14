@@ -16,7 +16,7 @@
 | **Runcell Science** | [runcell-ai](https://github.com/runcell-ai) | [runcell-science](https://github.com/runcell-ai/runcell-science) | Espacio local, React | Activo | Multimotor (Claude Code/Codex) |
 | **AutoResearchClaw** | [aiming-lab](https://github.com/aiming-lab) | [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw) | Python, CLI | Activo | Evaluación normada / Automatización |
 | **Dr. Claw** | [OpenLAIR](https://github.com/OpenLAIR) | [dr-claw](https://github.com/OpenLAIR/dr-claw) | Agente IDE local | Activo | Bioinformática y Medicina |
-| **The AI Scientist** | [Sakana AI](https://sakana.ai) | [AI-Scientist](https://github.com/SakanaAI/AI-Scientist) / [v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python, PyTorch | Académico | Aprendizaje automático / IA |
+| **[The AI Scientist](https://github.com/SakanaAI/AI-Scientist)** | [Sakana AI](https://sakana.ai) | [AI-Scientist](https://github.com/SakanaAI/AI-Scientist) / [v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python, PyTorch | Académico | Aprendizaje automático / IA |
 
 ---
 
@@ -84,28 +84,28 @@ A continuación se listan las principales plataformas y marcos de agentes cient�
 
 | Nombre del agente | Desarrollador | Lanzamiento | Posicionamiento principal | Método de despliegue |
 | :--- | :--- | :--- | :--- | :--- |
-| **Claude Science** | Anthropic | 2026.6 | Espacio de IA científica generalista | Local (macOS/Linux) + Nube |
-| **Omic (Omic AI)** | Omic AI | 2025 | Superinteligencia biológica / Fármacos | SaaS + Privado local |
-| **Biomni** | Stanford (team chino) | 2026.7 | Agente biomédico generalista | Claude Platform, Empresa |
-| **ScienceOS** | Independiente | 2025.8 | Agente de revisión de literatura | SaaS (Nube) |
-| **The AI Scientist** | Sakana AI (Japón) | 2024.8 | Descubrimiento científico automatizado | Código abierto, Python (GitHub) |
-| **Co-Scientist** | Google DeepMind | 2026.5 | Generación de hipótesis multiagente | Gemini for Science (bajo petición) |
-| **EvoScientist** | Independiente | 2026.3 | Marco de investigación autoevolutivo | Código abierto (Apache 2.0), PyPI |
-| **Agent Laboratory** | AMD + Johns Hopkins | 2025.1 | Investigación autónoma de extremo a extremo| Código abierto (soporta CPU/GPU) |
-| **BioNeMo Agent Toolkit** | NVIDIA | 2026.6 | Orquestación de agentes (ciencias vida) | NVIDIA NIM (Local o Nube) |
-| **LUMI-lab** | Universidad de Toronto| 2025.2 | Laboratorio físico autónomo (ARNm) | Integración física del laboratorio |
-| **Autoscience** | Autoscience | 2026.3 | Laboratorio autónomo de IA | Servicio administrado para empresas |
-| **OmicOS Science** | Equipo local | 2026.7 | Análisis genómico y workbench | App Store (Local + Nube) |
-| **SciMaster** | DeepVerse + Univ. SJTU | 2025.7 | Agente científico generalista | Plataforma Bohr (SaaS + Privado) |
-| **MolClaw** | Shanghai AI Lab + PKU | 2026.5 | Agente de cribado de moléculas | Colaboración académica |
-| **Yayi AI-Scientist** | Wenge + CAS | 2025.7 | Asistente de revisión de literatura | Plataforma SaaS |
-| **MoleculeOS (MOS)** | MoleculeMind | 2026.7 | Sistema operativo de R&D bio | Plataforma Empresa |
-| **MindSpore Science Agent**| Huawei | 2026.4 | Sistema de agentes científicos | Código abierto, base MindSpore |
-| **ElementsClaw** | Alibaba DAMO + UCAS | 2026.7 | Descubrimiento de materiales superconductores| Base predictiva abierta / Agente |
-| **Pangshi Agent Factory** | CAS | 2025.11 | Plataforma de generación de agentes | Plataforma Pangshi CAS |
+| **[Claude Science](https://www.anthropic.com/claude)** | Anthropic | 2026.6 | Espacio de IA científica generalista | Local (macOS/Linux) + Nube |
+| **[Omic (Omic AI)](https://omic.ai/)** | Omic AI | 2025 | Superinteligencia biológica / Fármacos | SaaS + Privado local |
+| **[Biomni](https://biomni.stanford.edu)** | Stanford (team chino) | 2026.7 | Agente biomédico generalista | Claude Platform, Empresa |
+| **[ScienceOS](https://scienceos.ai/)** | Independiente | 2025.8 | Agente de revisión de literatura | SaaS (Nube) |
+| **[The AI Scientist](https://github.com/SakanaAI/AI-Scientist)** | Sakana AI (Japón) | 2024.8 | Descubrimiento científico automatizado | Código abierto, Python (GitHub) |
+| **[Co-Scientist](https://deepmind.google/discover/blog/introducing-co-scientist-using-ai-agents-for-scientific-hypothesis-generation/)** | Google DeepMind | 2026.5 | Generación de hipótesis multiagente | Gemini for Science (bajo petición) |
+| **[EvoScientist](https://github.com/EvoScientist/EvoScientist)** | Independiente | 2026.3 | Marco de investigación autoevolutivo | Código abierto (Apache 2.0), PyPI |
+| **[Agent Laboratory](https://github.com/SamuelSchmidgall/AgentLaboratory)** | AMD + Johns Hopkins | 2025.1 | Investigación autónoma de extremo a extremo| Código abierto (soporta CPU/GPU) |
+| **[BioNeMo Agent Toolkit](https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit)** | NVIDIA | 2026.6 | Orquestación de agentes (ciencias vida) | NVIDIA NIM (Local o Nube) |
+| **[LUMI-lab](https://pharmacy.utoronto.ca/bowen-li)** | Universidad de Toronto| 2025.2 | Laboratorio físico autónomo (ARNm) | Integración física del laboratorio |
+| **[Autoscience](https://www.autoscience.ai/)** | Autoscience | 2026.3 | Laboratorio autónomo de IA | Servicio administrado para empresas |
+| **[OmicOS Science](https://github.com/omicverse)** | Equipo local | 2026.7 | Análisis genómico y workbench | App Store (Local + Nube) |
+| **[SciMaster](https://scimaster.bohrium.com/)** | DeepVerse + Univ. SJTU | 2025.7 | Agente científico generalista | Plataforma Bohr (SaaS + Privado) |
+| **[MolClaw](https://github.com/InternScience/MolClaw)** | Shanghai AI Lab + PKU | 2026.5 | Agente de cribado de moléculas | Colaboración académica |
+| **[Yayi AI-Scientist](https://yayi.wenge.com)** | Wenge + CAS | 2025.7 | Asistente de revisión de literatura | Plataforma SaaS |
+| **[MoleculeOS (MOS)](https://mos.moleculemind.com/login)** | MoleculeMind | 2026.7 | Sistema operativo de R&D bio | Plataforma Empresa |
+| **[MindSpore Science Agent](https://github.com/mindspore-ai/mindscience)**| Huawei | 2026.4 | Sistema de agentes científicos | Código abierto, base MindSpore |
+| **[ElementsClaw](https://arxiv.org/abs/2604.23758)** | Alibaba DAMO + UCAS | 2026.7 | Descubrimiento de materiales superconductores| Base predictiva abierta / Agente |
+| **[Pangshi Agent Factory](https://scienceone.cn/)** | CAS | 2025.11 | Plataforma de generación de agentes | Plataforma Pangshi CAS |
 | **Agente "Dasheng"** | SAIS + Univ. Fudan | 2026.3 | Agente con alta iniciativa de sistema | Plataforma Xinghe Qizhi |
-| **BioMedAgent** | Grupo académico | 2026.4 | Análisis de datos biomédicos | Réplica académica |
-| **OmicsClaw** | Tsinghua AI4Life Lab | 2026.3 | Agente de análisis multiómico | Docker (basado en OpenClaw) |
+| **[BioMedAgent](https://github.com/BOBQWERA/BioMedAgent)** | Grupo académico | 2026.4 | Análisis de datos biomédicos | Réplica académica |
+| **[OmicsClaw](https://github.com/TianGzlab/OmicsClaw)** | Tsinghua AI4Life Lab | 2026.3 | Agente de análisis multiómico | Docker (basado en OpenClaw) |
 
 ---
 

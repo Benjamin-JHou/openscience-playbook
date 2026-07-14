@@ -16,7 +16,7 @@
 | **Runcell Science** | [runcell-ai](https://github.com/runcell-ai) | [runcell-science](https://github.com/runcell-ai/runcell-science) | 로컬 워크스페이스, React | 활성 | 멀티 엔진 (Claude Code/Codex 등) |
 | **AutoResearchClaw** | [aiming-lab](https://github.com/aiming-lab) | [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw) | Python, CLI | 활성 | 정량적 벤치마크 / 자동 실행 |
 | **Dr. Claw** | [OpenLAIR](https://github.com/OpenLAIR) | [dr-claw](https://github.com/OpenLAIR/dr-claw) | 로컬 IDE 에이전트 | 활성 | 코드 집중형 바이오/의학 연구 |
-| **The AI Scientist** | [Sakana AI](https://sakana.ai) | [AI-Scientist](https://github.com/SakanaAI/AI-Scientist) / [v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python, PyTorch | 학술 연구 | 머신러닝 / AI 연구 |
+| **[The AI Scientist](https://github.com/SakanaAI/AI-Scientist)** | [Sakana AI](https://sakana.ai) | [AI-Scientist](https://github.com/SakanaAI/AI-Scientist) / [v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python, PyTorch | 학술 연구 | 머신러닝 / AI 연구 |
 
 ---
 
@@ -84,28 +84,28 @@ Tauri 프레임워크를 기반으로 구축된 로컬 우선, 모델 독립적 
 
 | 에이전트 / 툴 이름 | 개발처 | 출시년도 | 핵심 포지셔닝 | 배포 방식 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Claude Science** | Anthropic | 2026.6 | 범용 과학 연구용 AI 워크스페이스 | 로컬 (macOS/Linux) + 클라우드 |
-| **Omic (Omic AI)** | Omic AI | 2025 | 생물학적 초지능 / 신약 개발 | SaaS + 온프레미스 사내 구축 |
-| **Biomni** | 스탠퍼드 대 (중국계 팀) | 2026.7 | 범용 생물의학 에이전트 | Claude Platform 기반, 기업용 |
-| **ScienceOS** | 개인 개발자 | 2025.8 | 논문 문헌 조사 에이전트 | SaaS 클라우드 |
-| **The AI Scientist** | Sakana AI (일본) | 2024.8 | 전과정 자동화 종단간 과학 발견 | 오픈소스, Python (GitHub) |
-| **Co-Scientist** | Google DeepMind | 2026.5 | 다중 에이전트 기반 가설 생성 | Gemini for Science (신청 필요) |
-| **EvoScientist** | 개인 개발자 | 2026.3 | 자가 진화 멀티 에이전트 연구 프레임워크 | 오픈소스 (Apache 2.0), PyPI |
-| **Agent Laboratory** | AMD + 존스 홉킨스 | 2025.1 | 전과정 자율 과학 연구 프레임워크 | 오픈소스 (CPU/GPU 지원) |
-| **BioNeMo Agent Toolkit** | NVIDIA | 2026.6 | 생명과학 에이전트 오케스트레이션 툴 | NVIDIA NIM (클라우드 또는 로컬) |
-| **LUMI-lab** | 토론토 대학 | 2025.2 | AI 자율 물리 실험실 (mRNA) | 물리 실험실 하드웨어 통합 배포 |
-| **Autoscience** | Autoscience | 2026.3 | 자율 AI 연구 실험실 | 기업용 매니지드 서비스 |
-| **OmicOS Science** | 국내 팀 | 2026.7 | 전사체 분석 / AI 워크벤치 | App Store (로컬 + 클라우드) |
-| **SciMaster** | DeepVerse + 상하이 교통대 | 2025.7 | 범용 과학 연구 에이전트 | Bohr Platform (SaaS + 사내 구축) |
-| **MolClaw** | 상하이 AI 랩 + 베이징대 | 2026.5 | 신약 스크리닝 에이전트 | 대학 공동 연구 배포 |
-| **Yayi AI-Scientist** | 중코문가 + 중국과학원 | 2025.7 | 문헌 연구 보조 도구 | SaaS 플랫폼 |
-| **MoleculeOS (MOS)** | 분자의 마음 | 2026.7 | AI 생물 연구 개발 OS | 기업용 플랫폼 |
-| **MindSpore Science Agent**| 화웨이 | 2026.4 | 과학 연구 에이전트 시스템 | 오픈소스, MindSpore 기반 |
-| **ElementsClaw** | 알리바바 다모원 + 중국국과대 | 2026.7 | 초전도 재료 발견 에이전트 | 오픈 데이터베이스 / 예측 모델 |
-| **Pangshi Agent Factory** | 중국과학원 | 2025.11 | 연구 에이전트 생성 플랫폼 | CAS Pangshi 플랫폼 |
-| **"Dasheng" Sci-Agent** | SAIS + 푸단 대학 | 2026.3 | 시스템 레벨 고주도성 과학 에이전트 | Xinghe Qizhi 플랫폼 |
-| **BioMedAgent** | 국내 학술 그룹 | 2026.4 | 생물의학 데이터 분석 에이전트 | 학술 성과, 재현 가능 |
-| **OmicsClaw** | 칭화대 AI4Life Lab | 2026.3 | 멀티오믹스 AI 에이전트 | Docker 배포 (OpenClaw 기반) |
+| **[Claude Science](https://www.anthropic.com/claude)** | Anthropic | 2026.6 | 범용 과학 연구용 AI 워크스페이스 | 로컬 (macOS/Linux) + 클라우드 |
+| **[Omic (Omic AI)](https://omic.ai/)** | Omic AI | 2025 | 생물학적 초지능 / 신약 개발 | SaaS + 온프레미스 사내 구축 |
+| **[Biomni](https://biomni.stanford.edu)** | 스탠퍼드 대 (중국계 팀) | 2026.7 | 범용 생물의학 에이전트 | Claude Platform 기반, 기업용 |
+| **[ScienceOS](https://scienceos.ai/)** | 개인 개발자 | 2025.8 | 논문 문헌 조사 에이전트 | SaaS 클라우드 |
+| **[The AI Scientist](https://github.com/SakanaAI/AI-Scientist)** | Sakana AI (일본) | 2024.8 | 전과정 자동화 종단간 과학 발견 | 오픈소스, Python (GitHub) |
+| **[Co-Scientist](https://deepmind.google/discover/blog/introducing-co-scientist-using-ai-agents-for-scientific-hypothesis-generation/)** | Google DeepMind | 2026.5 | 다중 에이전트 기반 가설 생성 | Gemini for Science (신청 필요) |
+| **[EvoScientist](https://github.com/EvoScientist/EvoScientist)** | 개인 개발자 | 2026.3 | 자가 진화 멀티 에이전트 연구 프레임워크 | 오픈소스 (Apache 2.0), PyPI |
+| **[Agent Laboratory](https://github.com/SamuelSchmidgall/AgentLaboratory)** | AMD + 존스 홉킨스 | 2025.1 | 전과정 자율 과학 연구 프레임워크 | 오픈소스 (CPU/GPU 지원) |
+| **[BioNeMo Agent Toolkit](https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit)** | NVIDIA | 2026.6 | 생명과학 에이전트 오케스트레이션 툴 | NVIDIA NIM (클라우드 또는 로컬) |
+| **[LUMI-lab](https://pharmacy.utoronto.ca/bowen-li)** | 토론토 대학 | 2025.2 | AI 자율 물리 실험실 (mRNA) | 물리 실험실 하드웨어 통합 배포 |
+| **[Autoscience](https://www.autoscience.ai/)** | Autoscience | 2026.3 | 자율 AI 연구 실험실 | 기업용 매니지드 서비스 |
+| **[OmicOS Science](https://github.com/omicverse)** | 국내 팀 | 2026.7 | 전사체 분석 / AI 워크벤치 | App Store (로컬 + 클라우드) |
+| **[SciMaster](https://scimaster.bohrium.com/)** | DeepVerse + 상하이 교통대 | 2025.7 | 범용 과학 연구 에이전트 | Bohr Platform (SaaS + 사내 구축) |
+| **[MolClaw](https://github.com/InternScience/MolClaw)** | 상하이 AI 랩 + 베이징대 | 2026.5 | 신약 스크리닝 에이전트 | 대학 공동 연구 배포 |
+| **[Yayi AI-Scientist](https://yayi.wenge.com)** | 중코문가 + 중국과학원 | 2025.7 | 문헌 연구 보조 도구 | SaaS 플랫폼 |
+| **[MoleculeOS (MOS)](https://mos.moleculemind.com/login)** | 분자의 마음 | 2026.7 | AI 생물 연구 개발 OS | 기업용 플랫폼 |
+| **[MindSpore Science Agent](https://github.com/mindspore-ai/mindscience)**| 화웨이 | 2026.4 | 과학 연구 에이전트 시스템 | 오픈소스, MindSpore 기반 |
+| **[ElementsClaw](https://arxiv.org/abs/2604.23758)** | 알리바바 다모원 + 중국국과대 | 2026.7 | 초전도 재료 발견 에이전트 | 오픈 데이터베이스 / 예측 모델 |
+| **[Pangshi Agent Factory](https://scienceone.cn/)** | 중국과학원 | 2025.11 | 연구 에이전트 생성 플랫폼 | CAS Pangshi 플랫폼 |
+| **["Dasheng" Sci-Agent](https://www.sais.com.cn/)** | SAIS + 푸단 대학 | 2026.3 | 시스템 레벨 고주도성 과학 에이전트 | Xinghe Qizhi 플랫폼 |
+| **[BioMedAgent](https://github.com/BOBQWERA/BioMedAgent)** | 국내 학술 그룹 | 2026.4 | 생물의학 데이터 분석 에이전트 | 학술 성과, 재현 가능 |
+| **[OmicsClaw](https://github.com/TianGzlab/OmicsClaw)** | 칭화대 AI4Life Lab | 2026.3 | 멀티오믹스 AI 에이전트 | Docker 배포 (OpenClaw 기반) |
 
 ---
 
