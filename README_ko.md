@@ -175,6 +175,16 @@ Tauri 프레임워크를 기반으로 구축된 로컬 우선, 모델 독립적 
 
 ---
 
+## 📂 템플릿 및 구성 예시
+
+빠르게 시작할 수 있도록 본 저장소에서는 미리 구축된 템플릿과 설정 파일을 제공합니다:
+
+- **[문헌 조사 매트릭스 템플릿 (CSV)](templates/literature_matrix_template.csv)**: 문헌 검색 매개변수, 결과, 지표, DOI를 정리하기 위한 구조화된 CSV 템플릿.
+- **[실험 계획서 템플릿 (Markdown)](templates/experiment_plan_template.md)**: 가설 정의, 데이터셋 설명, 기준 모델, 실행 기록 및 데이터 검증 체크리스트를 기록하기 위한 표준화된 템플릿.
+- **[MCP (Model Context Protocol) 설정 예시 (JSON)](examples/mcp_config_example.json)**: PubMed Central, Materials Project, SQLite, 로컬 파일 시스템, GitHub MCP 서버 설정을 위한 샘플 구성 파일.
+
+---
+
 ## ❓ 자주 묻는 질문 및 문제 해결
 
 ### Q1: 윈도우 환경에서 "Python not found" 에러가 발생합니다.
@@ -215,6 +225,6 @@ graph TD
 ---
 
 ## 🤝 기여 및 라이선스
-이 플레이북을 개선하기 위한 모든 기여를 환영합니다! 유용한 리소스, 새로운 팁, 또는 오역 수정사항이 있다면 언제든지 Issue를 열거나 Pull Request를 제출해 주세요.
+이 플레이북을 개선하기 위한 모든 기여를 환영합니다! 유용한 리소스, 새로운 팁, 또는 오역 수정사항이 있다면 언제든지 Issue를 열거나 Pull Request를 제출해 주세요. 자세한 내용은 **[기여 가이드라인 (CONTRIBUTING.md)](CONTRIBUTING.md)**을 참고해 주세요.
 
-본 프로젝트는 [MIT 라이선스](LICENSE)로 관리되고 있습니다.
+본 프로젝트는 **[MIT 라이선스 (LICENSE)](LICENSE)**로 관리되고 있습니다.

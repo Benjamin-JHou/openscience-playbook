@@ -227,6 +227,16 @@
 
 ---
 
+## 📂 模板与配置示例
+
+为了帮助您快速上手，本仓库提供了开箱即用的科研模板与配置示例：
+
+- **[文献综述矩阵模板 (CSV)](templates/literature_matrix_template.csv)**：一个结构化的 CSV 模板，用于整理文献检索参数、研究结果、指标和 DOI。
+- **[实验方案设计模板 (Markdown)](templates/experiment_plan_template.md)**：一个标准化的 Markdown 模板，用于记录假设定义、数据集描述、基准模型、运行历史以及数据审计核对表。
+- **[MCP (Model Context Protocol) 配置文件示例 (JSON)](examples/mcp_config_example.json)**：一个 JSON 配置文件示例，展示如何配置 PubMed Central、Materials Project、SQLite、本地文件系统及 GitHub MCP 服务器。
+
+---
+
 ## ❓ 常见问答与故障排除
 
 ### Q1: 为什么在 Windows 上工作台提示 "Python not found"？
@@ -284,6 +294,6 @@ graph TD
 ---
 
 ## 🤝 贡献与许可
-欢迎为本指南做出贡献！您可以随时提出 Issue 或提交 Pull Request，补充新的资源、技巧或翻译版本。
+欢迎为本指南做出贡献！您可以随时提出 Issue 或提交 Pull Request，补充新的资源、技巧或翻译版本，请参考我们的 **[贡献指南 (CONTRIBUTING.md)](CONTRIBUTING.md)**。
 
-本项目采用 [MIT 许可证](LICENSE) 开源。
+本项目采用 **[MIT 许可证 (LICENSE)](LICENSE)** 开源。

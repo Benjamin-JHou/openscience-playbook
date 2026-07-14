@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "pubmed-central": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-pubmed"
+      ],
+      "env": {
+        "NCBI_API_KEY": "YOUR_NCBI_API_KEY_HERE"
+      }
+    },
+    "materials-project": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "mcp_materials_project"
+      ],
+      "env": {
+        "MP_API_KEY": "YOUR_MATERIALS_PROJECT_API_KEY_HERE"
+      }
+    },
+    "local-filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/yangzi/Desktop/openscience-playbook/workspace"
+      ]
+    },
+    "sqlite-database": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sqlite"
+      ],
+      "env": {
+        "SQLITE_DB_PATH": "/Users/yangzi/Desktop/openscience-playbook/workspace/data/lab_records.db"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_GITHUB_TOKEN_HERE"
+      }
+    }
+  }
+}

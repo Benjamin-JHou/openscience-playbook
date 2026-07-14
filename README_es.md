@@ -175,6 +175,16 @@ Para maximizar el rendimiento de estas herramientas, los investigadores deben se
 
 ---
 
+## 📂 Plantillas y Ejemplos de Configuración
+
+Para ayudarle a comenzar rápidamente, este repositorio proporciona plantillas y archivos de configuración listos para usar:
+
+- **[Plantilla de matriz de literatura (CSV)](templates/literature_matrix_template.csv)**: Una plantilla CSV estructurada para organizar parámetros de búsqueda de literatura, hallazgos, métricas y DOI.
+- **[Plantilla de plan de experimento (Markdown)](templates/experiment_plan_template.md)**: Una plantilla estandarizada para registrar definiciones de hipótesis, descripciones de conjuntos de datos, modelos de referencia, historiales de ejecución y listas de control de validación de datos.
+- **[Ejemplo de configuración de MCP (Model Context Protocol) (JSON)](examples/mcp_config_example.json)**: Un archivo de configuración de muestra para configurar PubMed Central, Materials Project, SQLite, sistemas de archivos locales y servidores MCP de GitHub.
+
+---
+
 ## ❓ Preguntas frecuentes y Solución de problemas
 
 ### Q1: ¿Por qué me aparece "Python not found" en Windows?
@@ -215,6 +225,6 @@ graph TD
 ---
 
 ## 🤝 Colaboración y Licencia
-¡Agradecemos cualquier tipo de contribución a este manual! Siéntete libre de abrir problemas (issues) o enviar solicitudes de cambio (pull requests) para agregar recursos, consejos o traducciones adicionales.
+¡Agradecemos cualquier tipo de contribución a este manual! Siéntete libre de abrir problemas (issues) o enviar solicitudes de cambio (pull requests) para agregar recursos, consejos o traducciones adicionales siguiendo nuestras **[Directrices de Contribución (CONTRIBUTING.md)](CONTRIBUTING.md)**.
 
-Este proyecto se distribuye bajo la licencia [MIT](LICENSE).
+Este proyecto se distribuye bajo la licencia **[MIT (LICENSE)](LICENSE)**.

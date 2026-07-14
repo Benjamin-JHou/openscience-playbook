@@ -227,6 +227,16 @@ To get the most out of an AI scientific workbench, developers and researchers sh
 
 ---
 
+## 📂 Templates & Configuration Examples
+
+To help you get started quickly, this repository provides pre-built templates and configuration files:
+
+- **[Literature Matrix Template (CSV)](templates/literature_matrix_template.csv)**: A structured CSV template for organizing literature search parameters, findings, metrics, and DOIs.
+- **[Experiment Plan Template (Markdown)](templates/experiment_plan_template.md)**: A standardized template for logging hypothesis definition, dataset descriptions, baseline models, run histories, and data validation checklists.
+- **[Model Context Protocol (MCP) Configuration Example (JSON)](examples/mcp_config_example.json)**: A sample configuration file for setting up PubMed Central, Materials Project, SQLite, local filesystems, and GitHub MCP servers.
+
+---
+
 ## ❓ FAQ & Troubleshooting
 
 ### Q1: Why does the workbench show "Python not found" on Windows?
@@ -291,6 +301,6 @@ graph TD
 ---
 
 ## 🤝 Contributing & License
-We welcome contributions to this playbook! Feel free to open issues or submit pull requests with new resources, tips, or translations.
+We welcome contributions to this playbook! Feel free to open issues or submit pull requests with new resources, tips, or translations by following our **[Contributing Guidelines](CONTRIBUTING.md)**.
 
-This project is open-sourced under the [MIT License](LICENSE).
+This project is open-sourced under the **[MIT License](LICENSE)**.

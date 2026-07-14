@@ -192,6 +192,16 @@ Pour maximiser l'efficacité d'un environnement de travail d'IA scientifique, su
 
 ---
 
+## 📂 Modèles & Exemples de Configuration
+
+Pour vous aider à démarrer rapidement, ce dépôt fournit des modèles et des fichiers de configuration prêts à l'emploi :
+
+- **[Modèle de matrice de littérature (CSV)](templates/literature_matrix_template.csv)** : Un modèle CSV structuré pour organiser vos paramètres de recherche documentaire, résultats, métriques et DOI.
+- **[Modèle de plan d'expérience (Markdown)](templates/experiment_plan_template.md)** : Un modèle standardisé pour enregistrer la définition de vos hypothèses, descriptions de jeux de données, modèles de base, historiques d'exécution et listes de contrôle de validation des données.
+- **[Exemple de configuration MCP (Model Context Protocol) (JSON)](examples/mcp_config_example.json)** : Un exemple de fichier de configuration pour mettre en place les serveurs MCP pour PubMed Central, Materials Project, SQLite, les systèmes de fichiers locaux et GitHub.
+
+---
+
 ## ❓ FAQ & Dépannage
 
 ### Q1 : Pourquoi mon environnement affiche-t-il "Python not found" sur Windows ?
@@ -235,6 +245,6 @@ graph TD
 ---
 
 ## 🤝 Contribution & Licence
-Les contributions à ce playbook sont les bienvenues ! N'hésitez pas à ouvrir des tickets (issues) ou à soumettre des demandes d'intégration (pull requests) avec de nouvelles ressources, astuces ou traductions.
+Les contributions à ce playbook sont les bienvenues ! N'hésitez pas à ouvrir des tickets (issues) ou à soumettre des demandes d'intégration (pull requests) avec de nouvelles ressources, astuces ou traductions en suivant nos **[Directives de Contribution (CONTRIBUTING.md)](CONTRIBUTING.md)**.
 
-Ce projet est sous licence [MIT](LICENSE).
+Ce projet est sous licence **[MIT (LICENSE)](LICENSE)**.

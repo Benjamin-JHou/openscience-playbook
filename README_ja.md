@@ -175,6 +175,16 @@ Tauri上に構築された、ローカルファーストかつモデルアグノ
 
 ---
 
+## 📂 テンプレートと構成例
+
+すぐに使い始められるよう、本リポジトリには事前に構築されたテンプレートと設定ファイルが用意されています：
+
+- **[文献レビュー行列テンプレート (CSV)](templates/literature_matrix_template.csv)**：文献の検索条件、結果、指標、DOIなどを整理するための構造化されたCSVテンプレート。
+- **[実験計画書テンプレート (Markdown)](templates/experiment_plan_template.md)**：仮説の定義、データセットの説明、基準モデル、実行履歴、データ監査用チェックリストを記録するための標準化されたテンプレート。
+- **[MCP (Model Context Protocol) 構成例 (JSON)](examples/mcp_config_example.json)**：PubMed Central、Materials Project、SQLite、ローカルファイルシステム、GitHub MCPサーバーを設定するためのサンプルファイル。
+
+---
+
 ## ❓ よくある質問とトラブルシューティング
 
 ### Q1: Windows上で「Python not found」と表示されます。
@@ -215,6 +225,6 @@ graph TD
 ---
 
 ## 🤝 貢献 & ライセンス
-本プレイブックへの貢献を歓迎します！新しいリソース、ヒント、または翻訳の追加について、Issueの起票やPull Requestの送信をいつでもお待ちしております。
+本プレイブックへの貢献を歓迎します！新しいリソース、ヒント、または翻訳の追加について、Issueの起票やPull Requestの送信をいつでもお待ちしております。詳細は **[貢献ガイドライン (CONTRIBUTING.md)](CONTRIBUTING.md)** をご覧ください。
 
-本プロジェクトは [MIT ライセンス](LICENSE) に基づいてオープンソースとして提供されています。
+本プロジェクトは **[MIT ライセンス (LICENSE)](LICENSE)** に基づいてオープンソースとして提供されています。
