@@ -162,6 +162,12 @@ Tauri上に構築された、ローカルファーストかつモデルアグノ
 *   **K-Dense Scientific Agent Skills**：バイオ情報学、計算化学、臨床研究、地学、計量経済学、金融など138以上のスキル。ClinVar、ChEMBL、COSMIC等のDBに直接接続。
 *   **scdenney/open-science-skills**：社会科学系スキル（テキスト分析、アンケートの信頼性評価、倫理審査など）。
 
+### 📦 推奨されるスキルリポジトリ
+Open Science Desktop およびエージェントワークフローを補完するため、以下のリポジトリを導入または参照することをお勧めします：
+*   **[ai4s-skills](https://github.com/ai4s-research/ai4s-skills)**：ai4s-research が提供する AI for Science 向け汎用スキルパッケージ。標準的な科学研究プロセスの基本タスクに対応。
+*   **[medical-research-skills](https://github.com/aipoch/medical-research-skills)**：aipoch が提供する医学・生命科学分野（PubMed、ClinVar対応）に特化したエージェントスキル。
+*   **[open-science-skills](https://github.com/scdenney/open-science-skills)**：scdenney が提供する社会科学特化のスキルリポジトリ（アンケート調査や倫理審査対応）。
+
 ### 2. 専門ドメインスキル
 *   **バイオ情報学 (`Genomic Analysis`)**：配列アライメント、差異発現解析、変異アノテーション（FASTQ/VCF対応）、NCBI/Ensembl連携。
 *   **計算化学・創薬 (`Cheminformatics Toolkit`)**：RDKitによる分子構造処理、相似度計算、ADMET予測、仮想スクリーニング。

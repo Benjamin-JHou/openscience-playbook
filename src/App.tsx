@@ -1407,6 +1407,91 @@ export default function App() {
           </div>
 
         </RevealOnScroll>
+
+        {/* Recommended Companion Skills Repositories */}
+        <RevealOnScroll className="mt-16">
+          <h3 className="text-2xl text-white mb-8 text-center font-display">
+            Recommended Desktop Skills Repositories
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            {/* Repo 1: ai4s-skills */}
+            <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[240px] hover:border-cyan-accent/30">
+              <div>
+                <span className="text-[10px] font-mono tracking-widest text-cyan-accent uppercase bg-cyan-accent/5 px-2 py-0.5 rounded border border-cyan-accent/15">
+                  General AI4S
+                </span>
+                <h3 className="text-lg font-semibold text-white mt-3 mb-2">ai4s-skills</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  General purpose AI for Science skills package for the Open Science Desktop client.
+                </p>
+              </div>
+              
+              <div className="flex justify-between items-center pt-4 border-t border-border/10">
+                <span className="text-xs text-muted-foreground">ai4s-research</span>
+                <a
+                  href="https://github.com/ai4s-research/ai4s-skills"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-cyan-accent flex items-center gap-1.5 hover:underline"
+                >
+                  View Repo <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+            </div>
+
+            {/* Repo 2: medical-research-skills */}
+            <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[240px] hover:border-purple-accent/30">
+              <div>
+                <span className="text-[10px] font-mono tracking-widest text-purple-accent uppercase bg-purple-accent/5 px-2 py-0.5 rounded border border-purple-accent/15">
+                  Medicine & Life Sciences
+                </span>
+                <h3 className="text-lg font-semibold text-white mt-3 mb-2">medical-research-skills</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Specialized medical and life sciences agent skills (PubMed, ClinVar integration).
+                </p>
+              </div>
+              
+              <div className="flex justify-between items-center pt-4 border-t border-border/10">
+                <span className="text-xs text-muted-foreground">aipoch</span>
+                <a
+                  href="https://github.com/aipoch/medical-research-skills"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-purple-accent flex items-center gap-1.5 hover:underline"
+                >
+                  View Repo <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+            </div>
+
+            {/* Repo 3: open-science-skills */}
+            <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[240px] hover:border-cyan-accent/30">
+              <div>
+                <span className="text-[10px] font-mono tracking-widest text-cyan-accent uppercase bg-cyan-accent/5 px-2 py-0.5 rounded border border-cyan-accent/15">
+                  Social Sciences
+                </span>
+                <h3 className="text-lg font-semibold text-white mt-3 mb-2">open-science-skills</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Social science specific skills covering text analysis, survey validity, ethics checks, etc.
+                </p>
+              </div>
+              
+              <div className="flex justify-between items-center pt-4 border-t border-border/10">
+                <span className="text-xs text-muted-foreground">scdenney</span>
+                <a
+                  href="https://github.com/scdenney/open-science-skills"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-cyan-accent flex items-center gap-1.5 hover:underline"
+                >
+                  View Repo <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </RevealOnScroll>
       </section>
 
       {/* 7. Enriched Cinematic Footer */}

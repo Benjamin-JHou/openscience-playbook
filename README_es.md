@@ -162,6 +162,12 @@ Para maximizar el rendimiento de estas herramientas, los investigadores deben se
 *   **K-Dense Scientific Agent Skills**: Más de 138 habilidades listas para bioinformática, química computacional, clínica, econometría y finanzas. Conexión a ClinVar, ChEMBL, COSMIC, etc.
 *   **scdenney/open-science-skills**: 23 habilidades para ciencias sociales (análisis de textos, validez de encuestas, ética).
 
+### 📦 Repositorios de Habilidades Recomendados
+Para complementar el Open Science Desktop y los flujos de trabajo de los agentes, recomendamos integrar o consultar los siguientes repositorios:
+*   **[ai4s-skills](https://github.com/ai4s-research/ai4s-skills)**: Un paquete general de habilidades para AI for Science de ai4s-research, que cubre las tareas principales del pipeline científico estándar.
+*   **[medical-research-skills](https://github.com/aipoch/medical-research-skills)**: Habilidades de agente especializadas en medicina y ciencias de la vida (con soporte para PubMed y ClinVar) de aipoch.
+*   **[open-science-skills](https://github.com/scdenney/open-science-skills)**: Habilidades específicas para ciencias sociales (verificación de encuestas y ética) de scdenney.
+
 ### 2. Habilidades por Áreas
 *   **Bioinformática (`Genomic Analysis`)**: Alineamiento de secuencias, expresión diferencial, anotación de variantes (FASTQ/VCF).
 *   **Química Computacional (`Cheminformatics Toolkit`)**: Predicción ADMET, cribado virtual, similitud molecular con RDKit.

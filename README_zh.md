@@ -208,6 +208,12 @@
 *   **K-Dense Scientific Agent Skills**：包含 138+ 个开箱即用的科研技能，覆盖生物信息、计算化学、临床研究、地学、统计计量和金融经济等。对接 ClinVar、ChEMBL、COSMIC、FRED 等专业数据库。
 *   **scdenney/open-science-skills**：包含 23 个社会科学方向的专项技能，支持文本计算、问卷效度检验、伦理审查等。
 
+### 📦 推荐配套使用的 Skills 技能仓库
+为配合 Open Science 桌面客户端使用，推荐导入或参考以下开源 Skills 技能包仓库：
+*   **[ai4s-skills](https://github.com/ai4s-research/ai4s-skills)**：由 ai4s-research 官方提供的通用 AI for Science 科研技能库，覆盖通用科研工作流的各个基础环节。
+*   **[medical-research-skills](https://github.com/aipoch/medical-research-skills)**：由 aipoch 提供的专项医学与生命科学技能库，深度适配生物医学与健康学研究流。
+*   **[open-science-skills](https://github.com/scdenney/open-science-skills)**：由 scdenney 提供的社会科学专项技能库，支持文本计量、道德核对等专项社科工作。
+
 ### 2. 垂直领域专项技能
 *   **生物信息学 (`Genomic Analysis`)**：序列比对、基因差异表达分析、变异位点注释，支持 FASTQ/VCF 文件，对接 NCBI/Ensembl。
 *   **化学与药物研发 (`Cheminformatics Toolkit`)**：基于 RDKit 的分子结构处理、相似度计算、ADMET 预测、化合物虚拟筛选。

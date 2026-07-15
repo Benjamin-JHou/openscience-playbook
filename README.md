@@ -208,6 +208,12 @@ To get the most out of an AI scientific workbench, developers and researchers sh
 *   **K-Dense Scientific Agent Skills**: 138+ ready-to-use skills covering bioinformatics, computational chemistry, clinical research, geosciences, econometrics, and finance. Direct database integrations with ClinVar, ChEMBL, COSMIC, etc.
 *   **scdenney/open-science-skills**: 23 social science skills covering text analysis, survey design, validation, and social science ethics checks.
 
+### 📦 Recommended Companion Skills Repositories
+To complement the Open Science Desktop and client workflows, we recommend integrating or referencing the following repositories:
+*   **[ai4s-skills](https://github.com/ai4s-research/ai4s-skills)**: A general AI for Science skills package by ai4s-research, covering core tasks of standard scientific pipelines.
+*   **[medical-research-skills](https://github.com/aipoch/medical-research-skills)**: Specialized medical and life sciences agent skills (with PubMed and ClinVar support) by aipoch.
+*   **[open-science-skills](https://github.com/scdenney/open-science-skills)**: Social science specific skills (survey check, ethical verification) by scdenney.
+
 ### 2. Vertical Domain Skill Packages
 *   **Bioinformatics (`Genomic Analysis`)**: Sequence alignment, differential gene expression, variant annotation, support for FASTQ/VCF files.
 *   **Cheminformatics (`Cheminformatics Toolkit`)**: ADMET property prediction, virtual screening, molecular structure manipulation, chemical similarity using RDKit.

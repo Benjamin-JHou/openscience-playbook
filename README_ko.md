@@ -162,6 +162,12 @@ Tauri 프레임워크를 기반으로 구축된 로컬 우선, 모델 독립적 
 *   **K-Dense Scientific Agent Skills**: 생물정보학, 계산화학, 임상연구, 지구과학, 계량경제, 금융 등 138개 이상의 스킬 제공. ClinVar, ChEMBL, COSMIC 등 DB 직접 연결.
 *   **scdenney/open-science-skills**: 사회과학을 위한 23개 스킬 (텍스트 분석, 설문 유효성 검증, 연구 윤리 등).
 
+### 📦 추천 스킬 저장소 (Repositories)
+Open Science Desktop 클라이언트 및 연구 워크플로를 보완하기 위해 아래 오픈소스 스킬 라이브러리를 연동하거나 참고하는 것을 권장합니다:
+*   **[ai4s-skills](https://github.com/ai4s-research/ai4s-skills)**: ai4s-research에서 제공하는 AI for Science 공통 기초 연구 스킬 패키지. 표준 연구 워크플로의 주요 단계를 지원합니다.
+*   **[medical-research-skills](https://github.com/aipoch/medical-research-skills)**: aipoch에서 제공하는 의학 및 생명과학 분야 (PubMed, ClinVar 연동) 특화 에이전트 스킬 세트.
+*   **[open-science-skills](https://github.com/scdenney/open-science-skills)**: scdenney에서 제공하는 사회과학 분야 특화 스킬 세트 (설문 유효성 검증, 윤리 검토 등).
+
 ### 2. 세부 분야 전문 스킬
 *   **생물정보학 (`Genomic Analysis`)**: 서열 정렬, 차이 발현 분석, 변이 주석 (FASTQ/VCF 대응), NCBI/Ensembl 연동.
 *   **계산화학 및 創藥 (`Cheminformatics Toolkit`)**: RDKit 기반 분자 구조 조작, 유사도 분석, ADMET 예측, 가상 스크리닝.

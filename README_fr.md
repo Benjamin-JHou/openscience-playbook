@@ -179,6 +179,12 @@ Pour maximiser l'efficacité d'un environnement de travail d'IA scientifique, su
 *   **K-Dense Scientific Agent Skills** : Plus de 138 compétences couvrant la bio-informatique, la chimie computationnelle, la recherche clinique, l'économétrie et la finance. Intégrations avec ClinVar, ChEMBL, COSMIC, etc.
 *   **scdenney/open-science-skills** : 23 compétences pour les sciences sociales (text mining, design de sondages, comités d'éthique).
 
+### 📦 Dépôts de Compétences Recommandés
+Pour compléter l'Open Science Desktop et les flux de travail des agents, nous vous recommandons d'intégrer ou de vous référer aux dépôts suivants :
+*   **[ai4s-skills](https://github.com/ai4s-research/ai4s-skills)** : Un ensemble général de compétences pour AI for Science par ai4s-research, couvrant les tâches de base du pipeline scientifique.
+*   **[medical-research-skills](https://github.com/aipoch/medical-research-skills)** : Compétences d'agent spécialisées pour la médecine et les sciences de la vie (avec PubMed et ClinVar) par aipoch.
+*   **[open-science-skills](https://github.com/scdenney/open-science-skills)** : Compétences spécifiques aux sciences sociales (vérification d'enquêtes et comités d'éthique) par scdenney.
+
 ### 2. Extensions Métiers
 *   **Bio-informatique (`Genomic Analysis`)** : Alignement de séquences, expression différentielle, annotation de variants (FASTQ/VCF).
 *   **Chimie computationnelle (`Cheminformatics Toolkit`)** : Prédiction ADMET, criblage virtuel, similarité moléculaire avec RDKit.
