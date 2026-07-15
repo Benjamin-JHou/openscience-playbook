@@ -173,6 +173,7 @@ Open Science Desktop 클라이언트 및 연구 워크플로를 보완하기 위
 *   **계산화학 및 創藥 (`Cheminformatics Toolkit`)**: RDKit 기반 분자 구조 조작, 유사도 분석, ADMET 예측, 가상 스크리닝.
 *   **임상 의학 (`Clinical Research`)**: 임상 시험 정보 탐색, 근거 등급 분류, 변이 병원성 해석 (PubMed/ClinVar 연동).
 *   **경제 및 금융 (`Economic Data Analysis`)**: 시계열 모델링, 재무 데이터 추출, FRED / SEC EDGAR 연동.
+*   **지구과학 및 환경 (`Geospatial Analysis`)**: 공간 분석, 위성 이미지 처리, GeoPandas 및 GDAL을 이용한 지리 공간 데이터 처리.
 
 ### 3. MCP (Model Context Protocol) 연동
 *   **mcp.science**: Materials Project 데이터베이스, PubMed Central 전체 텍스트 검색, 안전한 Python 샌드박스 등 전용 MCP 서버 제공.

@@ -173,6 +173,7 @@ Para complementar el Open Science Desktop y los flujos de trabajo de los agentes
 *   **Química Computacional (`Cheminformatics Toolkit`)**: Predicción ADMET, cribado virtual, similitud molecular con RDKit.
 *   **Medicina Clínica (`Clinical Research`)**: Búsqueda de ensayos clínicos, nivel de evidencia, patogenicidad (PubMed/ClinVar).
 *   **Economía y Finanzas (`Economic Data Analysis`)**: Series de tiempo, extracción de estados financieros, datos de FRED y SEC EDGAR.
+*   **Geografía y Medio Ambiente (`Geospatial Analysis`)**: Análisis espacial, procesamiento de imágenes satelitales, interpolación y procesamiento de datos geográficos con GeoPandas y GDAL.
 
 ### 3. Protocolos MCP (Model Context Protocol)
 *   **mcp.science**: Servidores para Materials Project, PubMed Central (acceso a textos completos) y caja de arena Python segura.

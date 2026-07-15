@@ -601,6 +601,141 @@ const langLabels: Record<keyof typeof langData, string> = {
   es: "ES",
 };
 
+const skillsTranslations: Record<keyof typeof langData, {
+  skillsTitle: string;
+  generalSkillsTitle: string;
+  verticalSkillsTitle: string;
+  kDenseTitle: string;
+  kDenseDesc: string;
+  scdenneyTitle: string;
+  scdenneyDesc: string;
+  genomicsTitle: string;
+  genomicsDesc: string;
+  chemistryTitle: string;
+  chemistryDesc: string;
+  clinicalTitle: string;
+  clinicalDesc: string;
+  economicsTitle: string;
+  economicsDesc: string;
+  geospatialTitle: string;
+  geospatialDesc: string;
+}> = {
+  en: {
+    skillsTitle: "Extended Skills Library",
+    generalSkillsTitle: "General & Cross-disciplinary Skills",
+    verticalSkillsTitle: "Vertical Domain Specialties",
+    kDenseTitle: "K-Dense Scientific Agent Skills",
+    kDenseDesc: "138+ ready-to-use skills covering bioinformatics, computational chemistry, clinical research, geosciences, econometrics, and finance. Direct database integrations with ClinVar, ChEMBL, COSMIC, FRED, etc.",
+    scdenneyTitle: "scdenney/open-science-skills",
+    scdenneyDesc: "23 social science skills covering text analysis, survey design, validation, and social science ethics checks.",
+    genomicsTitle: "Bioinformatics (Genomic Analysis)",
+    genomicsDesc: "Sequence alignment, differential gene expression, variant annotation, support for FASTQ/VCF files, NCBI/Ensembl integration.",
+    chemistryTitle: "Cheminformatics (Cheminformatics Toolkit)",
+    chemistryDesc: "ADMET property prediction, virtual screening, molecular structure manipulation, chemical similarity using RDKit.",
+    clinicalTitle: "Clinical Medicine (Clinical Research)",
+    clinicalDesc: "Trial search, evidence grading, variant pathogenicity analysis, integrating PubMed/ClinVar.",
+    economicsTitle: "Economics & Finance (Economic Data Analysis)",
+    economicsDesc: "Time series modeling, financial statement extraction, econometric calculations, integrating FRED and SEC EDGAR.",
+    geospatialTitle: "Geospatial & Environment (Geospatial Analysis)",
+    geospatialDesc: "Spatial interpolation, remote sensing image analysis, raster and vector geospatial processing using GeoPandas and GDAL."
+  },
+  zh: {
+    skillsTitle: "扩展技能包与垂直领域专项技能",
+    generalSkillsTitle: "通用与跨学科技能包",
+    verticalSkillsTitle: "垂直领域专项技能",
+    kDenseTitle: "K-Dense Scientific Agent Skills",
+    kDenseDesc: "包含 138+ 个开箱即用的科研技能，覆盖生物信息、计算化学、临床研究、地学、统计计量和金融经济等。对接 ClinVar、ChEMBL、COSMIC、FRED 等专业数据库。",
+    scdenneyTitle: "scdenney/open-science-skills",
+    scdenneyDesc: "包含 23 个社会科学方向的专项技能，支持文本计算、问卷效度检验、伦理审查等。",
+    genomicsTitle: "生物信息学 (Genomic Analysis)",
+    genomicsDesc: "序列比对、基因差异表达分析、变异位点注释，支持 FASTQ/VCF 文件，对接 NCBI/Ensembl。",
+    chemistryTitle: "化学与药物研发 (Cheminformatics Toolkit)",
+    chemistryDesc: "基于 RDKit 的分子结构处理、相似度计算、ADMET 预测、化合物虚拟筛选。",
+    clinicalTitle: "临床医学 (Clinical Research)",
+    clinicalDesc: "临床试验检索、变异致病性解读、循证医学证据分级，对接 ClinicalTrials 和 ClinVar 数据库。",
+    economicsTitle: "经济与金融 (Economic Data Analysis)",
+    economicsDesc: "经济时间序列建模、企业财报数据提取、计量分析，对接 FRED、SEC EDGAR。",
+    geospatialTitle: "地学与环境 (Geospatial Analysis)",
+    geospatialDesc: "空间插值、遥感影像分析、栅格与矢量地理数据处理，基于 GeoPandas 和 GDAL。"
+  },
+  es: {
+    skillsTitle: "Biblioteca de Habilidades Extendidas y Especialidades",
+    generalSkillsTitle: "Habilidades Generales y Multidisciplinarias",
+    verticalSkillsTitle: "Especialidades por Áreas Verticales",
+    kDenseTitle: "K-Dense Scientific Agent Skills",
+    kDenseDesc: "Más de 138 habilidades listas para bioinformática, química computacional, clínica, econometría y finanzas. Conexión a ClinVar, ChEMBL, COSMIC, etc.",
+    scdenneyTitle: "scdenney/open-science-skills",
+    scdenneyDesc: "23 habilidades para ciencias sociales (análisis de textos, validez de encuestas, ética).",
+    genomicsTitle: "Bioinformática (Genomic Analysis)",
+    genomicsDesc: "Alineamiento de secuencias, expresión diferencial, anotación de variantes (FASTQ/VCF), integración NCBI/Ensembl.",
+    chemistryTitle: "Química Computacional (Cheminformatics Toolkit)",
+    chemistryDesc: "Predicción ADMET, cribado virtual, similitud molecular y manipulación con RDKit.",
+    clinicalTitle: "Medicina Clínica (Clinical Research)",
+    clinicalDesc: "Búsqueda de ensayos clínicos, nivel de evidencia, patogenicidad de variantes (PubMed/ClinVar).",
+    economicsTitle: "Economía y Finanzas (Economic Data Analysis)",
+    economicsDesc: "Modelado de series de tiempo, extracción de estados financieros, datos de FRED y SEC EDGAR.",
+    geospatialTitle: "Geografía y Medio Ambiente (Geospatial Analysis)",
+    geospatialDesc: "Análisis espacial, procesamiento de imágenes satelitales, interpolación usando GeoPandas y GDAL."
+  },
+  fr: {
+    skillsTitle: "Bibliothèque de Compétences Étendues & Spécialités",
+    generalSkillsTitle: "Compétences Générales & Pluridisciplinaires",
+    verticalSkillsTitle: "Compétences Verticales Spécialisées",
+    kDenseTitle: "K-Dense Scientific Agent Skills",
+    kDenseDesc: "Plus de 138 compétences couvrant la bio-informatique, la chimie computationnelle, la recherche clinique, l'économétrie et la finance. Intégrations avec ClinVar, ChEMBL, COSMIC, etc.",
+    scdenneyTitle: "scdenney/open-science-skills",
+    scdenneyDesc: "23 compétences pour les sciences sociales (text mining, design de sondages, comités d'éthique).",
+    genomicsTitle: "Bio-informatique (Genomic Analysis)",
+    genomicsDesc: "Alignement de séquences, expression différentielle, annotation de variants (FASTQ/VCF), intégration NCBI/Ensembl.",
+    chemistryTitle: "Chimie Computationnelle (Cheminformatics Toolkit)",
+    chemistryDesc: "Prédiction ADMET, criblage virtuel, similarité moléculaire et manipulation avec RDKit.",
+    clinicalTitle: "Médecine Clinique (Clinical Research)",
+    clinicalDesc: "Recherche d'essais, notation de preuves, pathogénicité de variants (PubMed/ClinVar).",
+    economicsTitle: "Économie & Finance (Economic Data Analysis)",
+    economicsDesc: "Modélisation de séries temporelles, extraction d'états financiers, intégration FRED et SEC EDGAR.",
+    geospatialTitle: "Géospatial & Environnement (Geospatial Analysis)",
+    geospatialDesc: "Analyse spatiale, traitement d'images satellite, interpolation spatiale avec GeoPandas et GDAL."
+  },
+  ja: {
+    skillsTitle: "拡張スキルライブラリと専門分野別スキル",
+    generalSkillsTitle: "汎用・クロスドメインスキル",
+    verticalSkillsTitle: "専門ドメインスキル",
+    kDenseTitle: "K-Dense Scientific Agent Skills",
+    kDenseDesc: "バイオ情報学、計算化学、臨床研究、地学、計量経済学、金融など138以上のスキル。ClinVar、ChEMBL、COSMIC等のDBに直接接続。",
+    scdenneyTitle: "scdenney/open-science-skills",
+    scdenneyDesc: "社会科学系スキル（テキスト分析、アンケートの信頼性評価、倫理審査など23個のスキル）。",
+    genomicsTitle: "バイオ情報학 (Genomic Analysis)",
+    genomicsDesc: "配列アライメント、差異発現解析、変異ア노テーション（FASTQ/VCF対応）、NCBI/Ensembl連携。",
+    chemistryTitle: "計算化学・創薬 (Cheminformatics Toolkit)",
+    chemistryDesc: "RDKitによる分子構造処理、相似度計算、ADMET予測、仮想スクリー닝。",
+    clinicalTitle: "臨床医学 (Clinical Research)",
+    clinicalDesc: "治験情報の検索、証拠レベル評価、変異致病性解析（PubMed/ClinVar連携）。",
+    economicsTitle: "経済・金融 (Economic Data Analysis)",
+    economicsDesc: "時系列モデル作成、財務データ抽出、FRED / SEC EDGAR 連携。",
+    geospatialTitle: "地学・環境 (Geospatial Analysis)",
+    geospatialDesc: "空間解析、衛星画像処理、GeoPandas と GDAL による空間補間。"
+  },
+  ko: {
+    skillsTitle: "확장 스킬 라이브러리 및 세부 분야 스킬",
+    generalSkillsTitle: "도메인 통합 스킬",
+    verticalSkillsTitle: "세부 분야 전문 스킬",
+    kDenseTitle: "K-Dense Scientific Agent Skills",
+    kDenseDesc: "생물정보학, 계산화학, 임상연구, 지구과학, 계량경제, 금융 등 138개 이상의 스킬 제공. ClinVar, ChEMBL, COSMIC 등 DB 직접 연결.",
+    scdenneyTitle: "scdenney/open-science-skills",
+    scdenneyDesc: "사회과학을 위한 23개 스킬 (텍스트 분석, 설문 유효성 검증, 연구 윤리 등).",
+    genomicsTitle: "생물정보학 (Genomic Analysis)",
+    genomicsDesc: "서열 정렬, 차이 발현 분석, 변이 주석 (FASTQ/VCF 대응), NCBI/Ensembl 연동.",
+    chemistryTitle: "계산화학 및 신약 (Cheminformatics Toolkit)",
+    chemistryDesc: "RDKit 기반 분자 구조 조작, 유사도 분석, ADMET 예측, 가상 스크리닝.",
+    clinicalTitle: "임상 의학 (Clinical Research)",
+    clinicalDesc: "임상 시험 정보 탐색, 근거 등급 분류, 변이 병원성 해석 (PubMed/ClinVar 연동).",
+    economicsTitle: "경제 및 금융 (Economic Data Analysis)",
+    economicsDesc: "시계열 모델링, 재무 데이터 추출, FRED / SEC EDGAR 연동.",
+    geospatialTitle: "지구과학 및 환경 (Geospatial Analysis)",
+    geospatialDesc: "공간 분석, 위성 이미지 처리, GeoPandas 및 GDAL을 이용한 공간 보간."
+  }
+};
+
 export default function App() {
   const [activeLang, setActiveLang] = useState<keyof typeof langData>('en');
   const [searchQuery, setSearchQuery] = useState('');
@@ -926,6 +1061,59 @@ export default function App() {
                 {langLabels[lang]}
               </button>
             ))}
+          </div>
+        </RevealOnScroll>
+
+        {/* Extended Skills Library & Specialties */}
+        <RevealOnScroll className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* General Skills Packages */}
+          <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] backdrop-blur-md flex flex-col gap-6">
+            <h3 className="text-xl font-semibold text-white flex items-center gap-2 border-b border-border/30 pb-3">
+              <Sparkles className="h-5 w-5 text-cyan-accent" />
+              {skillsTranslations[activeLang].generalSkillsTitle}
+            </h3>
+            
+            <div className="flex flex-col gap-4">
+              <div className="p-4 rounded-xl bg-white/[0.02] border border-border/30 hover:border-cyan-accent/20 transition-all">
+                <h4 className="text-sm font-semibold text-cyan-accent mb-1.5">{skillsTranslations[activeLang].kDenseTitle}</h4>
+                <p className="text-xs text-muted-foreground leading-relaxed">{skillsTranslations[activeLang].kDenseDesc}</p>
+              </div>
+              <div className="p-4 rounded-xl bg-white/[0.02] border border-border/30 hover:border-cyan-accent/20 transition-all">
+                <h4 className="text-sm font-semibold text-cyan-accent mb-1.5">{skillsTranslations[activeLang].scdenneyTitle}</h4>
+                <p className="text-xs text-muted-foreground leading-relaxed">{skillsTranslations[activeLang].scdenneyDesc}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Vertical Specialties */}
+          <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] backdrop-blur-md flex flex-col gap-6">
+            <h3 className="text-xl font-semibold text-white flex items-center gap-2 border-b border-border/30 pb-3">
+              <Cpu className="h-5 w-5 text-purple-accent" />
+              {skillsTranslations[activeLang].verticalSkillsTitle}
+            </h3>
+            
+            <div className="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border/30 hover:border-purple-accent/20 transition-all">
+                <h4 className="text-xs font-semibold text-purple-accent mb-1">{skillsTranslations[activeLang].genomicsTitle}</h4>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">{skillsTranslations[activeLang].genomicsDesc}</p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border/30 hover:border-purple-accent/20 transition-all">
+                <h4 className="text-xs font-semibold text-purple-accent mb-1">{skillsTranslations[activeLang].chemistryTitle}</h4>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">{skillsTranslations[activeLang].chemistryDesc}</p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border/30 hover:border-purple-accent/20 transition-all">
+                <h4 className="text-xs font-semibold text-purple-accent mb-1">{skillsTranslations[activeLang].clinicalTitle}</h4>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">{skillsTranslations[activeLang].clinicalDesc}</p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border/30 hover:border-purple-accent/20 transition-all">
+                <h4 className="text-xs font-semibold text-purple-accent mb-1">{skillsTranslations[activeLang].economicsTitle}</h4>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">{skillsTranslations[activeLang].economicsDesc}</p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border/30 hover:border-purple-accent/20 transition-all">
+                <h4 className="text-xs font-semibold text-purple-accent mb-1">{skillsTranslations[activeLang].geospatialTitle}</h4>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">{skillsTranslations[activeLang].geospatialDesc}</p>
+              </div>
+            </div>
           </div>
         </RevealOnScroll>
       </section>
