@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   Search, 
   Copy, 
@@ -19,7 +19,10 @@ import {
   Beaker,
   TrendingUp,
   Stethoscope,
-  Map
+  Map,
+  ChevronUp,
+  Menu,
+  X
 } from 'lucide-react';
 
 interface Agent {
@@ -469,6 +472,43 @@ const mcpServersList = [
   }
 ];
 
+// Reusable Scroll Reveal Wrapper
+function RevealOnScroll({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      });
+    }, { threshold: 0.05 });
+    
+    const current = domRef.current;
+    if (current) {
+      observer.observe(current);
+    }
+    
+    return () => {
+      if (current) {
+        observer.unobserve(current);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={domRef}
+      className={`reveal-hidden ${isVisible ? 'reveal-visible' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
 // Interactive Magnetic Visual Showcase Card Component
 function MagneticCard() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -521,14 +561,14 @@ function MagneticCard() {
         }}
       >
         {/* Showcase element with linear gradient borders and glows */}
-        <div className="gradient-border-glow p-[1.5px] rounded-3xl overflow-hidden shadow-2xl">
-          <div className="bg-[#000e1b] rounded-3xl p-6 md:p-8 flex flex-col justify-between h-44 sm:h-52 backdrop-blur-md">
+        <div className="gradient-border-glow p-[1.5px] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-[#000e1b] rounded-2xl p-6 md:p-8 flex flex-col justify-between h-44 sm:h-52 backdrop-blur-md">
             <div className="flex justify-between items-start">
               <div>
                 <span className="text-[10px] font-mono tracking-widest text-cyan-accent uppercase bg-cyan-accent/10 px-2 py-0.5 rounded border border-cyan-accent/20">
                   Active Session
                 </span>
-                <h3 className="text-lg md:text-xl font-normal text-white mt-3" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                <h3 className="text-lg md:text-xl font-normal text-white mt-3 font-display">
                   PubMed Core-Agent Engine
                 </h3>
               </div>
@@ -560,6 +600,15 @@ export default function App() {
   const [activeStepId, setActiveStepId] = useState("step1");
   const [activeMcpId, setActiveMcpId] = useState("pubmed");
   const [activeCategoryFilter, setActiveCategoryFilter] = useState<string>("All");
+  
+  // Navigation states
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Newsletter mockup
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
   const t = langData[activeLang];
 
@@ -585,42 +634,189 @@ export default function App() {
     return matchesSearch && matchesCategory;
   });
 
-  return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-white/20 selection:text-white pb-24 overflow-x-hidden font-body">
-      
-      {/* Navigation Bar: delay 0, y -20 */}
-      <nav className="relative z-10 flex flex-row justify-between items-center px-8 py-6 max-w-7xl mx-auto border-b border-border/40 animate-fade-nav">
-        {/* Project Branding Logo */}
-        <div 
-          className="text-2xl tracking-tight text-white select-none font-semibold"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
-        >
-          Scientist.AI<sup className="text-xs font-sans ml-0.5 opacity-50">®</sup>
-        </div>
-        
-        {/* Nav Links */}
-        <div className="hidden md:flex items-center gap-8">
-          <a href="#" className="text-sm font-medium text-foreground transition-colors">Home</a>
-          <a href="#ecosystem" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Ecosystem</a>
-          <a href="#workbench" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Console</a>
-          <a href="#mcp" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">MCP Config</a>
-          <a href="#templates" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Templates</a>
-        </div>
+  // Track scroll position to handle Sticky Navigation, Scroll Spy, and FAB
+  useEffect(() => {
+    const handleScroll = () => {
+      // 1. Sticky Nav state
+      setIsScrolled(window.scrollY > 50);
 
-        {/* Contact CTA Button */}
+      // 2. Scroll Spy dynamic highlights
+      const sections = ['home', 'playbook', 'workbench', 'ecosystem', 'mcp', 'templates'];
+      let currentActive = 'home';
+      
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            currentActive = section;
+            break;
+          }
+        }
+      }
+      setActiveSection(currentActive);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false);
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background text-foreground selection:bg-cyan-accent/25 selection:text-white pb-24 overflow-x-hidden font-body">
+      
+      {/* 6. Scroll-to-Top Floating Action Button */}
+      <button
+        onClick={() => scrollToSection('home')}
+        className={`scroll-to-top liquid-glass p-3 rounded-full hover:scale-110 active:scale-95 transition-all text-white border border-white/10 hover:border-cyan-accent/50 group ${isScrolled ? 'visible' : ''}`}
+        aria-label="Scroll to top"
+      >
+        <ChevronUp className="h-5 w-5 text-cyan-accent group-hover:text-white transition-colors" />
+      </button>
+
+      {/* 3. Sticky Navigation with Scroll-Blur & Mobile Hamburger */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent ${isScrolled ? 'nav-scrolled py-3.5' : 'py-6'}`}>
+        <div className="flex flex-row justify-between items-center px-8 max-w-7xl mx-auto">
+          {/* Project Branding Logo */}
+          <div 
+            onClick={() => scrollToSection('home')}
+            className="text-2xl tracking-tight text-white select-none font-semibold cursor-pointer font-display"
+          >
+            Scientist.AI<sup className="text-xs font-sans ml-0.5 opacity-50">®</sup>
+          </div>
+          
+          {/* Nav Links (Desktop) */}
+          <div className="hidden md:flex items-center gap-8">
+            <button 
+              onClick={() => scrollToSection('home')} 
+              className={`text-sm font-medium transition-colors hover:text-foreground relative py-1 cursor-pointer ${activeSection === 'home' ? 'text-white' : 'text-muted-foreground'}`}
+            >
+              Home
+              {activeSection === 'home' && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-accent rounded-full animate-pulse"></span>}
+            </button>
+            <button 
+              onClick={() => scrollToSection('playbook')} 
+              className={`text-sm font-medium transition-colors hover:text-foreground relative py-1 cursor-pointer ${activeSection === 'playbook' ? 'text-white' : 'text-muted-foreground'}`}
+            >
+              Playbook
+              {activeSection === 'playbook' && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-accent rounded-full animate-pulse"></span>}
+            </button>
+            <button 
+              onClick={() => scrollToSection('workbench')} 
+              className={`text-sm font-medium transition-colors hover:text-foreground relative py-1 cursor-pointer ${activeSection === 'workbench' ? 'text-white' : 'text-muted-foreground'}`}
+            >
+              Console
+              {activeSection === 'workbench' && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-accent rounded-full animate-pulse"></span>}
+            </button>
+            <button 
+              onClick={() => scrollToSection('ecosystem')} 
+              className={`text-sm font-medium transition-colors hover:text-foreground relative py-1 cursor-pointer ${activeSection === 'ecosystem' ? 'text-white' : 'text-muted-foreground'}`}
+            >
+              Ecosystem
+              {activeSection === 'ecosystem' && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-accent rounded-full animate-pulse"></span>}
+            </button>
+            <button 
+              onClick={() => scrollToSection('mcp')} 
+              className={`text-sm font-medium transition-colors hover:text-foreground relative py-1 cursor-pointer ${activeSection === 'mcp' ? 'text-white' : 'text-muted-foreground'}`}
+            >
+              MCP Config
+              {activeSection === 'mcp' && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-accent rounded-full animate-pulse"></span>}
+            </button>
+            <button 
+              onClick={() => scrollToSection('templates')} 
+              className={`text-sm font-medium transition-colors hover:text-foreground relative py-1 cursor-pointer ${activeSection === 'templates' ? 'text-white' : 'text-muted-foreground'}`}
+            >
+              Templates
+              {activeSection === 'templates' && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-accent rounded-full animate-pulse"></span>}
+            </button>
+          </div>
+
+          {/* Contact CTA Button (Desktop) */}
+          <button 
+            onClick={() => scrollToSection('workbench')}
+            className="hidden md:block liquid-glass rounded-full px-6 py-2.5 text-sm font-medium text-foreground transition-all duration-300 transform hover:scale-[1.03] cursor-pointer"
+          >
+            Begin AI for science Journey
+          </button>
+
+          {/* Hamburger toggle button (Mobile) */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-muted-foreground hover:text-white transition-colors cursor-pointer"
+            aria-label="Toggle navigation menu"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Slide-down Mobile Navigation Overlay */}
+      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''} flex flex-col justify-center items-center gap-6 px-6`}>
         <button 
-          onClick={() => {
-            const el = document.getElementById('workbench');
-            el?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="liquid-glass rounded-full px-6 py-2.5 text-sm font-medium text-foreground transition-all duration-300 transform hover:scale-[1.03]"
+          onClick={() => scrollToSection('home')} 
+          className={`text-xl font-medium transition-colors py-2 cursor-pointer ${activeSection === 'home' ? 'text-cyan-accent' : 'text-muted-foreground'}`}
+        >
+          Home
+        </button>
+        <button 
+          onClick={() => scrollToSection('playbook')} 
+          className={`text-xl font-medium transition-colors py-2 cursor-pointer ${activeSection === 'playbook' ? 'text-cyan-accent' : 'text-muted-foreground'}`}
+        >
+          Playbook
+        </button>
+        <button 
+          onClick={() => scrollToSection('workbench')} 
+          className={`text-xl font-medium transition-colors py-2 cursor-pointer ${activeSection === 'workbench' ? 'text-cyan-accent' : 'text-muted-foreground'}`}
+        >
+          Console
+        </button>
+        <button 
+          onClick={() => scrollToSection('ecosystem')} 
+          className={`text-xl font-medium transition-colors py-2 cursor-pointer ${activeSection === 'ecosystem' ? 'text-cyan-accent' : 'text-muted-foreground'}`}
+        >
+          Ecosystem
+        </button>
+        <button 
+          onClick={() => scrollToSection('mcp')} 
+          className={`text-xl font-medium transition-colors py-2 cursor-pointer ${activeSection === 'mcp' ? 'text-cyan-accent' : 'text-muted-foreground'}`}
+        >
+          MCP Config
+        </button>
+        <button 
+          onClick={() => scrollToSection('templates')} 
+          className={`text-xl font-medium transition-colors py-2 cursor-pointer ${activeSection === 'templates' ? 'text-cyan-accent' : 'text-muted-foreground'}`}
+        >
+          Templates
+        </button>
+
+        <button 
+          onClick={() => scrollToSection('workbench')}
+          className="liquid-glass rounded-full px-8 py-3 text-base font-semibold text-foreground transition-all duration-300 transform hover:scale-[1.03] mt-8 cursor-pointer"
         >
           Begin AI for science Journey
         </button>
-      </nav>
+      </div>
 
       {/* Cinematic Hero Section */}
-      <header className="relative flex flex-col justify-center items-center text-center px-6 min-h-[80vh] max-w-4xl mx-auto z-10">
+      <header id="home" className="relative flex flex-col justify-center items-center text-center px-6 min-h-[95vh] max-w-7xl mx-auto z-10 pt-28">
+        
+        {/* 2. Hero Ambient Glow Layer */}
+        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden select-none">
+          <div className="absolute top-[10%] left-[15%] w-[450px] h-[450px] rounded-full bg-cyan-accent/5 filter blur-[100px] ambient-glow-cyan"></div>
+          <div className="absolute top-[25%] right-[10%] w-[400px] h-[400px] rounded-full bg-purple-accent/4 filter blur-[120px] ambient-glow-purple"></div>
+        </div>
+
         {/* Pulse Capsule Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/95 tracking-widest uppercase font-mono mb-8 animate-fade-nav">
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-accent animate-pulse"></span>
@@ -629,8 +825,7 @@ export default function App() {
 
         {/* Title: delay 0.15, y 40 with Linear Gradient text */}
         <h1 
-          className="text-6xl md:text-8xl tracking-tight leading-none mb-6 animate-fade-title font-normal bg-gradient-to-r from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
+          className="text-6xl md:text-8xl tracking-tight leading-none mb-6 animate-fade-title font-normal bg-gradient-to-r from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent hero-neon-text font-display"
         >
           AI-Scientist Playbook
         </h1>
@@ -641,29 +836,29 @@ export default function App() {
         </p>
 
         {/* Contact Button / CTA Section: delay 0.5, y 20 */}
-        <div className="flex flex-row gap-4 animate-fade-btn z-20">
-          <a
-            href="#ecosystem"
-            className="liquid-glass px-8 py-3.5 rounded-full text-sm font-medium transition-all duration-300 hover:scale-[1.03] text-foreground border border-white/10 hover:border-cyan-accent/50"
+        <div className="flex flex-col sm:flex-row gap-4 animate-fade-btn z-20">
+          <button
+            onClick={() => scrollToSection('ecosystem')}
+            className="liquid-glass px-8 py-3.5 rounded-full text-sm font-medium transition-all duration-300 hover:scale-[1.03] text-foreground border border-white/10 hover:border-cyan-accent/50 cursor-pointer"
           >
             Explore Agent Ecosystem
-          </a>
-          <a
-            href="#workbench"
-            className="bg-gradient-to-r from-cyan-accent to-purple-accent text-[#000913] px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 hover:opacity-90 hover:scale-[1.03]"
+          </button>
+          <button
+            onClick={() => scrollToSection('workbench')}
+            className="bg-gradient-to-r from-cyan-accent to-purple-accent text-[#000913] px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 hover:opacity-90 hover:scale-[1.03] cursor-pointer"
           >
             Open Interactive Console
-          </a>
+          </button>
         </div>
 
         {/* Portrait / Showcase Card (with Magnet setup): delay 0.6, y 30 */}
-        <div className="w-full mt-10">
+        <div className="w-full mt-12">
           <MagneticCard />
         </div>
       </header>
 
       {/* Vertical Domain Specialties */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
+      <RevealOnScroll className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <div className="p-5 rounded-2xl border border-border/30 bg-white/[0.01] hover:bg-white/[0.02] transition-colors flex flex-col items-center text-center">
             <Dna className="h-6 w-6 text-cyan-accent mb-3" />
@@ -686,15 +881,22 @@ export default function App() {
             <h4 className="text-sm font-medium text-white">Geospatial</h4>
           </div>
         </div>
-      </section>
+      </RevealOnScroll>
 
       {/* Language Toggle & Intro */}
-      <section id="playbook" className="max-w-7xl mx-auto px-6 py-12 border-t border-border/20 mt-16">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+      <div className="max-w-7xl mx-auto px-6 mt-16">
+        <div className="section-gradient-divider mb-12"></div>
+      </div>
+      
+      <section id="playbook" className="max-w-7xl mx-auto px-6 py-12 scroll-mt-24">
+        <RevealOnScroll className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
           <div>
-            <h2 className="text-4xl tracking-tight text-white mb-2" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              Handbook Reference Playbook
-            </h2>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-xs font-mono font-bold tracking-widest text-cyan-accent bg-cyan-accent/10 border border-cyan-accent/20 px-2 py-0.5 rounded uppercase">01</span>
+              <h2 className="text-4xl tracking-tight text-white font-display">
+                Handbook Reference Playbook
+              </h2>
+            </div>
             <p className="text-muted-foreground text-sm max-w-xl">
               {t.intro}
             </p>
@@ -706,7 +908,7 @@ export default function App() {
               <button
                 key={lang}
                 onClick={() => setActiveLang(lang)}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                   activeLang === lang 
                     ? "bg-white text-[#000913] shadow-md" 
                     : "text-muted-foreground hover:text-foreground"
@@ -716,125 +918,152 @@ export default function App() {
               </button>
             ))}
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* Interactive Scientific Workbench IDE */}
-      <section id="workbench" className="max-w-7xl mx-auto px-6 py-8">
-        <div className="w-full rounded-3xl border border-border/40 bg-white/[0.01] backdrop-blur-lg overflow-hidden">
-          
-          {/* Mock IDE Titlebar */}
-          <div className="px-6 py-4 border-b border-border/40 bg-white/[0.02] flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500/80"></div>
-              <div className="h-3 w-3 rounded-full bg-yellow-500/80"></div>
-              <div className="h-3 w-3 rounded-full bg-green-500/80"></div>
-              <span className="text-xs font-mono text-muted-foreground ml-4">ai_scientist_workspace.config</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground bg-white/5 px-3 py-1 rounded-md border border-border/30">
-              <Cpu className="h-3 w-3 text-cyan-accent" /> Connected: Local-Sandbox
-            </div>
-          </div>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="section-gradient-divider mb-12"></div>
+      </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 min-h-[500px]">
+      <section id="workbench" className="max-w-7xl mx-auto px-6 py-8 scroll-mt-24">
+        <RevealOnScroll className="mb-8">
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-mono font-bold tracking-widest text-cyan-accent bg-cyan-accent/10 border border-cyan-accent/20 px-2 py-0.5 rounded uppercase">02</span>
+            <h2 className="text-4xl tracking-tight text-white font-display">
+              {t.promptsTitle}
+            </h2>
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="w-full rounded-2xl border border-border/40 bg-white/[0.01] backdrop-blur-lg overflow-hidden">
             
-            {/* Left sidebar: Steps Selector */}
-            <div className="border-r border-border/20 p-6 flex flex-col gap-2 bg-black/10">
-              <div className="text-[10px] font-semibold tracking-wider text-muted-foreground uppercase mb-4 px-3">
-                Research Pipeline
+            {/* Mock IDE Titlebar */}
+            <div className="px-6 py-4 border-b border-border/40 bg-white/[0.02] flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="h-3 w-3 rounded-full bg-red-500/80"></div>
+                <div className="h-3 w-3 rounded-full bg-yellow-500/80"></div>
+                <div className="h-3 w-3 rounded-full bg-green-500/80"></div>
+                <span className="text-xs font-mono text-muted-foreground ml-4">ai_scientist_workspace.config</span>
               </div>
-              {t.steps.map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => setActiveStepId(s.id)}
-                  className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center justify-between ${
-                    activeStepId === s.id
-                      ? "bg-white/10 text-white border-l-2 border-cyan-accent pl-3.5"
-                      : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                  }`}
-                >
-                  <span>{s.label}</span>
-                  {activeStepId === s.id && <Sparkles className="h-3.5 w-3.5 text-cyan-accent" />}
-                </button>
-              ))}
+              <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground bg-white/5 px-3 py-1 rounded-md border border-border/30">
+                <Cpu className="h-3 w-3 text-cyan-accent" /> Connected: Local-Sandbox
+              </div>
             </div>
 
-            {/* Middle & Right: Code Editor Console */}
-            <div className="lg:col-span-3 p-8 flex flex-col justify-between bg-black/20">
-              <div>
-                <div className="flex justify-between items-center mb-6">
-                  <div>
-                    <h3 className="text-xl font-medium text-white">{currentStep.heading}</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">{currentStep.desc}</p>
-                  </div>
-                  
+            <div className="grid grid-cols-1 lg:grid-cols-4 min-h-[500px]">
+              
+              {/* Left sidebar: Steps Selector */}
+              <div className="border-r border-border/20 p-6 flex flex-col gap-2 bg-black/10">
+                <div className="text-[10px] font-semibold tracking-wider text-muted-foreground uppercase mb-4 px-3">
+                  Research Pipeline
+                </div>
+                {t.steps.map((s) => (
                   <button
-                    onClick={() => handleCopy(currentStep.code, currentStep.id)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/50 bg-white/5 hover:bg-white/10 transition-colors text-xs text-muted-foreground hover:text-white"
+                    key={s.id}
+                    onClick={() => setActiveStepId(s.id)}
+                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center justify-between cursor-pointer ${
+                      activeStepId === s.id
+                        ? "bg-white/10 text-white border-l-2 border-cyan-accent pl-3.5"
+                        : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    }`}
                   >
-                    {copiedText === currentStep.id ? (
-                      <>
-                        <Check className="h-3.5 w-3.5 text-green-400" /> Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3.5 w-3.5" /> Copy Prompt
-                      </>
-                    )}
+                    <span>{s.label}</span>
+                    {activeStepId === s.id && <Sparkles className="h-3.5 w-3.5 text-cyan-accent" />}
                   </button>
-                </div>
+                ))}
+              </div>
 
-                <div className="flex flex-row gap-4 mb-4">
-                  <div className="text-[10px] font-semibold uppercase tracking-wider text-cyan-accent bg-cyan-accent/5 px-2.5 py-1 rounded-md border border-cyan-accent/20">
-                    Recommended Skills: {currentStep.skills}
-                  </div>
-                </div>
-
-                {/* Console text area with linear gradient accent border */}
-                <div className="relative rounded-2xl border border-border/45 bg-black/40 overflow-hidden">
-                  <div className="flex flex-row font-mono text-xs leading-relaxed p-6 overflow-x-auto text-muted-foreground">
-                    {/* Line numbers mockup */}
-                    <div className="text-white/20 select-none text-right pr-6 border-r border-border/20 flex flex-col">
-                      {currentStep.code.split('\n').map((_, index) => (
-                        <span key={index}>{index + 1}</span>
-                      ))}
+              {/* Middle & Right: Code Editor Console */}
+              <div className="lg:col-span-3 p-8 flex flex-col justify-between bg-black/20">
+                <div>
+                  <div className="flex justify-between items-center mb-6">
+                    <div>
+                      <h3 className="text-xl font-medium text-white">{currentStep.heading}</h3>
+                      <p className="text-xs text-muted-foreground mt-0.5">{currentStep.desc}</p>
                     </div>
-                    {/* Prompt code */}
-                    <pre className="pl-6 text-white/90 whitespace-pre-wrap flex-1 overflow-x-auto max-h-[300px]">
-                      {currentStep.code}
-                    </pre>
+                    
+                    <button
+                      onClick={() => handleCopy(currentStep.code, currentStep.id)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/50 bg-white/5 hover:bg-white/10 transition-colors text-xs text-muted-foreground hover:text-white cursor-pointer"
+                    >
+                      {copiedText === currentStep.id ? (
+                        <>
+                          <Check className="h-3.5 w-3.5 text-green-400" /> Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3.5 w-3.5" /> Copy Prompt
+                        </>
+                      )}
+                    </button>
                   </div>
+
+                  <div className="flex flex-row gap-4 mb-4">
+                    <div className="text-[10px] font-semibold uppercase tracking-wider text-cyan-accent bg-cyan-accent/5 px-2.5 py-1 rounded-md border border-cyan-accent/20">
+                      Recommended Skills: {currentStep.skills}
+                    </div>
+                  </div>
+
+                  {/* Console text area with linear gradient accent border */}
+                  <div className="relative rounded-2xl border border-border/45 bg-black/40 overflow-hidden">
+                    <div className="flex flex-row font-mono text-xs leading-relaxed p-6 overflow-x-auto text-muted-foreground">
+                      {/* Line numbers mockup */}
+                      <div className="text-white/20 select-none text-right pr-6 border-r border-border/20 flex flex-col">
+                        {currentStep.code.split('\n').map((_, index) => (
+                          <span key={index}>{index + 1}</span>
+                        ))}
+                      </div>
+                      {/* Prompt code */}
+                      <pre className="pl-6 text-white/90 whitespace-pre-wrap flex-1 overflow-x-auto max-h-[300px]">
+                        {currentStep.code}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-muted-foreground mt-6 pt-6 border-t border-border/20">
+                  <AlertCircle className="h-4 w-4 shrink-0 text-white/50" />
+                  <span>Inject the prompt directly into your local open-source client workspace.</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs text-muted-foreground mt-6 pt-6 border-t border-border/20">
-                <AlertCircle className="h-4 w-4 shrink-0 text-white/50" />
-                <span>Inject the prompt directly into your local open-source client workspace.</span>
-              </div>
             </div>
-
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* Ecosystem Hub */}
-      <section id="ecosystem" className="max-w-7xl mx-auto px-6 py-20 mt-12">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="section-gradient-divider mb-12"></div>
+      </div>
+
+      <section id="ecosystem" className="max-w-7xl mx-auto px-6 py-20 scroll-mt-24">
+        <RevealOnScroll className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
           <div>
-            <h2 className="text-5xl text-white mb-2" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              Agent Ecosystem Directory
-            </h2>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-xs font-mono font-bold tracking-widest text-cyan-accent bg-cyan-accent/10 border border-cyan-accent/20 px-2 py-0.5 rounded uppercase">03</span>
+              <h2 className="text-4xl text-white font-display">
+                Agent Ecosystem Directory
+              </h2>
+            </div>
             <p className="text-muted-foreground text-sm max-w-xl">
               Compare deployable scientific agents across biological models, material synthesis pipelines, and general workflows.
             </p>
           </div>
 
           <div className="flex items-center gap-4 w-full md:w-auto">
+            {/* 5. Live Count Badge */}
+            <span className="text-xs bg-cyan-accent/10 border border-cyan-accent/20 px-3 py-1.5 rounded-full text-cyan-accent font-mono font-semibold">
+              {filteredAgents.length} {filteredAgents.length === 1 ? 'Agent' : 'Agents'}
+            </span>
+
             {/* View layout toggle */}
             <div className="flex p-0.5 bg-white/5 rounded-lg border border-border/40">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`p-1.5 rounded-md transition-all ${
+                className={`p-1.5 rounded-md transition-all cursor-pointer ${
                   viewMode === "grid" ? "bg-white/10 text-white" : "text-muted-foreground hover:text-white"
                 }`}
                 title="Card Grid"
@@ -843,7 +1072,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => setViewMode("table")}
-                className={`p-1.5 rounded-md transition-all ${
+                className={`p-1.5 rounded-md transition-all cursor-pointer ${
                   viewMode === "table" ? "bg-white/10 text-white" : "text-muted-foreground hover:text-white"
                 }`}
                 title="Interactive Table"
@@ -864,15 +1093,15 @@ export default function App() {
               />
             </div>
           </div>
-        </div>
+        </RevealOnScroll>
 
         {/* Category Filter Chips */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <RevealOnScroll className="flex flex-wrap gap-2 mb-8">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategoryFilter(cat)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
                 activeCategoryFilter === cat
                   ? "bg-white text-[#000913]"
                   : "bg-white/5 text-muted-foreground border border-border/30 hover:text-foreground"
@@ -881,16 +1110,17 @@ export default function App() {
               {cat}
             </button>
           ))}
-        </div>
+        </RevealOnScroll>
 
         {/* Dynamic Layout: Grid vs. Table */}
         {viewMode === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filteredAgents.length > 0 ? (
               filteredAgents.map((agent, idx) => (
-                <div 
+                <RevealOnScroll 
                   key={idx} 
-                  className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between min-h-[220px] hover:border-cyan-accent/30"
+                  delay={idx * 30} // 5. Stagger delay
+                  className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between min-h-[220px] hover:border-cyan-accent/30"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
@@ -919,139 +1149,161 @@ export default function App() {
                       Deploy <ExternalLink className="h-3 w-3" />
                     </a>
                   </div>
-                </div>
+                </RevealOnScroll>
               ))
             ) : (
-              <div className="col-span-full py-16 text-center text-muted-foreground border border-border/40 rounded-3xl">
+              <div className="col-span-full py-16 text-center text-muted-foreground border border-border/40 rounded-2xl">
                 <AlertCircle className="h-8 w-8 mx-auto mb-3 opacity-50" />
                 No agents matched your search or category filter.
               </div>
             )}
           </div>
         ) : (
-          <div className="w-full overflow-x-auto rounded-3xl border border-border/40 bg-white/[0.01] backdrop-blur-lg">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-border/40 text-xs font-semibold tracking-wider text-muted-foreground uppercase bg-white/[0.02]">
-                  <th className="py-5 px-6">Agent Name</th>
-                  <th className="py-5 px-6">Developer</th>
-                  <th className="py-5 px-6">Release</th>
-                  <th className="py-5 px-6">Core Positioning</th>
-                  <th className="py-5 px-6">Deployment</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border/20 text-sm">
-                {filteredAgents.length > 0 ? (
-                  filteredAgents.map((agent, idx) => (
-                    <tr key={idx} className="hover:bg-white/[0.02] transition-colors">
-                      <td className="py-4 px-6 font-medium text-white">
-                        <a 
-                          href={agent.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="inline-flex items-center gap-1.5 text-cyan-accent hover:underline decoration-cyan-accent/30"
-                        >
-                          {agent.name}
-                          <ExternalLink className="h-3 w-3 opacity-80" />
-                        </a>
-                      </td>
-                      <td className="py-4 px-6 text-muted-foreground">{agent.developer}</td>
-                      <td className="py-4 px-6 text-muted-foreground font-mono">{agent.release}</td>
-                      <td className="py-4 px-6 text-white/90">{agent.positioning}</td>
-                      <td className="py-4 px-6 text-muted-foreground">{agent.deployment}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={5} className="py-12 text-center text-muted-foreground">
-                      <AlertCircle className="h-8 w-8 mx-auto mb-3 opacity-50" />
-                      No agents matched your search query.
-                    </td>
+          <RevealOnScroll>
+            <div className="w-full overflow-x-auto rounded-2xl border border-border/40 bg-white/[0.01] backdrop-blur-lg">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-border/40 text-xs font-semibold tracking-wider text-muted-foreground uppercase bg-white/[0.02]">
+                    <th className="py-5 px-6">Agent Name</th>
+                    <th className="py-5 px-6">Developer</th>
+                    <th className="py-5 px-6">Release</th>
+                    <th className="py-5 px-6">Core Positioning</th>
+                    <th className="py-5 px-6">Deployment</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-border/20 text-sm">
+                  {filteredAgents.length > 0 ? (
+                    filteredAgents.map((agent, idx) => (
+                      <tr key={idx} className="table-row-hover">
+                        <td className="py-4 px-6 font-medium text-white">
+                          <a 
+                            href={agent.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="inline-flex items-center gap-1.5 text-cyan-accent hover:underline decoration-cyan-accent/30"
+                          >
+                            {agent.name}
+                            <ExternalLink className="h-3 w-3 opacity-80" />
+                          </a>
+                        </td>
+                        <td className="py-4 px-6 text-muted-foreground">{agent.developer}</td>
+                        <td className="py-4 px-6 text-muted-foreground font-mono">{agent.release}</td>
+                        <td className="py-4 px-6 text-white/90">{agent.positioning}</td>
+                        <td className="py-4 px-6 text-muted-foreground">{agent.deployment}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={5} className="py-12 text-center text-muted-foreground">
+                        <AlertCircle className="h-8 w-8 mx-auto mb-3 opacity-50" />
+                        No agents matched your search query.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </RevealOnScroll>
         )}
       </section>
 
       {/* Interactive MCP Configurator Panel */}
-      <section id="mcp" className="max-w-7xl mx-auto px-6 py-12 border-t border-border/20 mt-16">
-        <h2 className="text-4xl text-white mb-2 text-center" style={{ fontFamily: "'Instrument Serif', serif" }}>
-          Model Context Protocol Configurator
-        </h2>
-        <p className="text-sm text-muted-foreground text-center mb-12 max-w-lg mx-auto">
-          Tweak and verify scientific data nodes in your config file. Copy nodes directly into your workspace profiles.
-        </p>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="section-gradient-divider mb-12"></div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          {/* Config selector pane */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
-            {mcpServersList.map((m) => (
-              <button
-                key={m.id}
-                onClick={() => setActiveMcpId(m.id)}
-                className={`text-left p-5 rounded-2xl border transition-all flex flex-col justify-between ${
-                  activeMcpId === m.id
-                    ? "border-cyan-accent bg-cyan-accent/5 text-white"
-                    : "border-border/30 hover:border-white/20 hover:bg-white/[0.01] text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <div>
-                  <h4 className="text-sm font-semibold text-white">{m.name}</h4>
-                  <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{m.desc}</p>
-                </div>
-                <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono mt-4 text-cyan-accent/60">
-                  <Database className="h-3 w-3" /> Connector Node
-                </div>
-              </button>
-            ))}
+      <section id="mcp" className="max-w-7xl mx-auto px-6 py-12 scroll-mt-24">
+        <RevealOnScroll className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <span className="text-xs font-mono font-bold tracking-widest text-cyan-accent bg-cyan-accent/10 border border-cyan-accent/20 px-2 py-0.5 rounded uppercase">04</span>
+            <h2 className="text-4xl text-white font-display">
+              Model Context Protocol Configurator
+            </h2>
           </div>
+          <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+            Tweak and verify scientific data nodes in your config file. Copy nodes directly into your workspace profiles.
+          </p>
+        </RevealOnScroll>
 
-          {/* Config viewer codeblock: gradient border glow */}
-          <div className="lg:col-span-3 rounded-2xl border border-border/40 bg-black/40 p-6 flex flex-col justify-between relative">
-            <div>
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-[10px] font-mono text-muted-foreground">mcp_config.json</span>
+        <RevealOnScroll>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            {/* Config selector pane */}
+            <div className="lg:col-span-2 flex flex-col gap-4">
+              {mcpServersList.map((m) => (
                 <button
-                  onClick={() => handleCopy(currentMcp.code, `mcp-${currentMcp.id}`)}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-border/50 bg-white/5 hover:bg-white/10 transition-colors text-xs text-muted-foreground hover:text-white"
+                  key={m.id}
+                  onClick={() => setActiveMcpId(m.id)}
+                  className={`text-left p-5 rounded-2xl border transition-all flex flex-col justify-between cursor-pointer ${
+                    activeMcpId === m.id
+                      ? "border-cyan-accent bg-cyan-accent/5 text-white"
+                      : "border-border/30 hover:border-white/20 hover:bg-white/[0.01] text-muted-foreground hover:text-foreground"
+                  }`}
                 >
-                  {copiedText === `mcp-${currentMcp.id}` ? (
-                    <>
-                      <Check className="h-3 w-3 text-green-400" /> Copied!
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-3 w-3" /> Copy Node
-                    </>
-                  )}
+                  <div>
+                    <h4 className="text-sm font-semibold text-white">{m.name}</h4>
+                    <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{m.desc}</p>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono mt-4 text-cyan-accent/60">
+                    <Database className="h-3 w-3" /> Connector Node
+                  </div>
                 </button>
+              ))}
+            </div>
+
+            {/* Config viewer codeblock: gradient border glow */}
+            <div className="lg:col-span-3 rounded-2xl border border-border/40 bg-black/40 p-6 flex flex-col justify-between relative">
+              <div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[10px] font-mono text-muted-foreground">mcp_config.json</span>
+                  <button
+                    onClick={() => handleCopy(currentMcp.code, `mcp-${currentMcp.id}`)}
+                    className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-border/50 bg-white/5 hover:bg-white/10 transition-colors text-xs text-muted-foreground hover:text-white cursor-pointer"
+                  >
+                    {copiedText === `mcp-${currentMcp.id}` ? (
+                      <>
+                        <Check className="h-3 w-3 text-green-400" /> Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3 w-3" /> Copy Node
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <pre className="text-xs font-mono text-white/90 overflow-x-auto whitespace-pre leading-relaxed p-4 rounded-xl bg-black/50 border border-border/20">
+                  {currentMcp.code}
+                </pre>
               </div>
 
-              <pre className="text-xs font-mono text-white/90 overflow-x-auto whitespace-pre leading-relaxed p-4 rounded-xl bg-black/50 border border-border/20">
-                {currentMcp.code}
-              </pre>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mt-6 pt-4 border-t border-border/10">
-              <ShieldCheck className="h-4 w-4 text-cyan-accent" />
-              <span>Verified sandbox executable parameters.</span>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mt-6 pt-4 border-t border-border/10">
+                <ShieldCheck className="h-4 w-4 text-cyan-accent" />
+                <span>Verified sandbox executable parameters.</span>
+              </div>
             </div>
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* Downloads / Templates Center */}
-      <section id="templates" className="max-w-7xl mx-auto px-6 py-12 border-t border-border/20 mt-16">
-        <h2 className="text-4xl text-white mb-10 text-center" style={{ fontFamily: "'Instrument Serif', serif" }}>
-          Downloads & Templates Center
-        </h2>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="section-gradient-divider mb-12"></div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section id="templates" className="max-w-7xl mx-auto px-6 py-12 scroll-mt-24">
+        <RevealOnScroll className="text-center mb-10">
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <span className="text-xs font-mono font-bold tracking-widest text-cyan-accent bg-cyan-accent/10 border border-cyan-accent/20 px-2 py-0.5 rounded uppercase">05</span>
+            <h2 className="text-4xl text-white font-display">
+              Downloads & Templates Center
+            </h2>
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* Template 1: literature_matrix_template.csv */}
-          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-cyan-accent/30">
+          <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-cyan-accent/30">
             <div>
               <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-border/50 mb-6">
                 <FileText className="h-6 w-6 text-cyan-accent" />
@@ -1066,13 +1318,13 @@ export default function App() {
               <a
                 href="templates/literature_matrix_template.csv"
                 download
-                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white"
+                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white cursor-pointer"
               >
                 <Download className="h-3.5 w-3.5 text-cyan-accent" /> Download CSV
               </a>
               <button
                 onClick={() => handleCopy("Paper Name,Year,Core Task,Datasets,Methodology,Performance Metrics,Findings,Limitations,DOI/PMID/arXiv ID", "csv")}
-                className="p-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-colors text-muted-foreground hover:text-white"
+                className="p-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-colors text-muted-foreground hover:text-white cursor-pointer"
               >
                 {copiedText === "csv" ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
               </button>
@@ -1080,7 +1332,7 @@ export default function App() {
           </div>
 
           {/* Template 2: experiment_plan_template.md */}
-          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-purple-accent/30">
+          <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-purple-accent/30">
             <div>
               <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-border/50 mb-6">
                 <BookOpen className="h-6 w-6 text-purple-accent" />
@@ -1095,13 +1347,13 @@ export default function App() {
               <a
                 href="templates/experiment_plan_template.md"
                 download
-                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white"
+                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white cursor-pointer"
               >
                 <Download className="h-3.5 w-3.5 text-purple-accent" /> Download MD
               </a>
               <button
                 onClick={() => handleCopy("# Scientific Experiment Plan\n- Hypothesis:\n- Datasets:\n- Models:\n- Run Logs:", "plan")}
-                className="p-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-colors text-muted-foreground hover:text-white"
+                className="p-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-colors text-muted-foreground hover:text-white cursor-pointer"
               >
                 {copiedText === "plan" ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
               </button>
@@ -1109,7 +1361,7 @@ export default function App() {
           </div>
 
           {/* Template 3: mcp_config_example.json */}
-          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-cyan-accent/30">
+          <div className="p-6 rounded-2xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-cyan-accent/30">
             <div>
               <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-border/50 mb-6">
                 <Terminal className="h-6 w-6 text-cyan-accent" />
@@ -1123,7 +1375,7 @@ export default function App() {
             <div className="flex gap-3">
               <button
                 onClick={() => handleCopy(mcpConfigExample, "mcp")}
-                className="flex-1 py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white"
+                className="flex-1 py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white cursor-pointer"
               >
                 {copiedText === "mcp" ? (
                   <>
@@ -1138,29 +1390,100 @@ export default function App() {
               <a
                 href="examples/mcp_config_example.json"
                 download
-                className="p-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-colors text-muted-foreground hover:text-white"
+                className="p-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-colors text-muted-foreground hover:text-white cursor-pointer"
               >
                 <Download className="h-4 w-4 text-cyan-accent" />
               </a>
             </div>
           </div>
 
-        </div>
+        </RevealOnScroll>
       </section>
 
-      {/* Understated Cinematic Footer */}
-      <footer id="footer" className="max-w-7xl mx-auto px-8 pt-24 pb-12 border-t border-border/20 mt-20 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-muted-foreground">
-        <div>
-          <span className="text-white mr-1.5 font-semibold">Scientist.AI®</span> 
-          <span>© 2026 Benjamin J. Hou. All rights reserved.</span>
+      {/* 7. Enriched Cinematic Footer */}
+      <footer id="footer" className="max-w-7xl mx-auto px-8 pt-20 pb-12 border-t border-border/20 mt-28">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
+          {/* Brand info */}
+          <div className="md:col-span-2">
+            <div className="text-2xl text-white select-none font-semibold mb-4 font-display">
+              Scientist.AI<sup className="text-xs font-sans ml-0.5 opacity-50">®</sup>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+              The definitive resource playbook and workspace configuration templates for deploying autonomous agents and multi-agent pipelines in academic labs.
+            </p>
+          </div>
+
+          {/* Quick links list */}
+          <div>
+            <h4 className="text-xs font-mono font-bold tracking-widest text-cyan-accent uppercase mb-4">Resources</h4>
+            <div className="flex flex-col gap-2.5 text-sm text-muted-foreground">
+              <button onClick={() => scrollToSection('playbook')} className="text-left hover:text-white transition-colors cursor-pointer">Reference Playbook</button>
+              <button onClick={() => scrollToSection('workbench')} className="text-left hover:text-white transition-colors cursor-pointer">Execution Console</button>
+              <button onClick={() => scrollToSection('ecosystem')} className="text-left hover:text-white transition-colors cursor-pointer">Agent Directory</button>
+              <button onClick={() => scrollToSection('mcp')} className="text-left hover:text-white transition-colors cursor-pointer">MCP Connectors</button>
+              <button onClick={() => scrollToSection('templates')} className="text-left hover:text-white transition-colors cursor-pointer">Workspace Templates</button>
+            </div>
+          </div>
+
+          {/* Subscription / mock watcher input */}
+          <div>
+            <h4 className="text-xs font-mono font-bold tracking-widest text-purple-accent uppercase mb-4">Stay Synchronized</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+              Get notified of new scientific MCP connectors and workflow updates.
+            </p>
+            {newsletterSubscribed ? (
+              <div className="p-3.5 bg-green-500/10 border border-green-500/20 rounded-xl text-xs text-green-400 flex items-center gap-2">
+                <Check className="h-4 w-4" /> Thank you for subscribing!
+              </div>
+            ) : (
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (newsletterEmail) setNewsletterSubscribed(true);
+                }}
+                className="flex gap-2"
+              >
+                <input
+                  type="email"
+                  required
+                  placeholder="name@institution.edu"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  className="flex-1 bg-white/5 border border-border/50 rounded-xl px-3 py-2 text-xs text-white placeholder-muted-foreground focus:outline-none focus:border-white/50 transition-colors"
+                />
+                <button
+                  type="submit"
+                  className="bg-white hover:bg-white/95 text-[#000913] px-3.5 py-2 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] cursor-pointer"
+                >
+                  Join
+                </button>
+              </form>
+            )}
+          </div>
         </div>
-        
-        <div className="flex gap-6">
-          <a href="CONTRIBUTING.md" className="hover:text-white transition-colors">Contributing Guidelines</a>
-          <a href="LICENSE" className="hover:text-white transition-colors">MIT License</a>
-          <a href="https://github.com/Benjamin-JHou/openscience-playbook" className="hover:text-white transition-colors inline-flex items-center gap-1">
-            GitHub Repository <ExternalLink className="h-3 w-3" />
-          </a>
+
+        {/* Bottom bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-border/10 text-xs text-muted-foreground">
+          <div className="flex flex-col sm:flex-row items-center gap-2.5">
+            <span>© 2026 Benjamin J. Hou. All rights reserved.</span>
+            <span className="hidden sm:inline text-white/10">|</span>
+            <span className="inline-flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/10 font-mono text-[10px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-accent animate-pulse"></span> Built with React + Vite + Tailwind
+            </span>
+          </div>
+          
+          <div className="flex gap-6">
+            <a href="CONTRIBUTING.md" className="hover:text-white transition-colors">Contributing</a>
+            <a href="LICENSE" className="hover:text-white transition-colors">MIT License</a>
+            <a 
+              href="https://github.com/Benjamin-JHou/openscience-playbook" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors inline-flex items-center gap-1"
+            >
+              GitHub <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
         </div>
       </footer>
 

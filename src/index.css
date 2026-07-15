@@ -60,6 +60,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Selection color */
+::selection {
+  background: hsla(var(--cyan-accent), 0.25);
+  color: white;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -130,7 +136,118 @@ body {
   pointer-events: none;
 }
 
-/* User-Specified Animation Delays and Translations (Cubic Bezier for Premium Feel) */
+/* ============================================
+   SCROLL-TRIGGERED REVEAL ANIMATIONS
+   ============================================ */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   HERO AMBIENT GLOW — BREATHING ANIMATION
+   ============================================ */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-18px) scale(1.03); }
+}
+.ambient-glow-cyan {
+  animation: float-slow 8s ease-in-out infinite;
+}
+.ambient-glow-purple {
+  animation: float-slow 10s ease-in-out infinite 2s;
+}
+
+/* Hero title neon halo */
+.hero-neon-text {
+  text-shadow: 0 0 80px hsla(180,100%,50%,0.15), 0 0 160px hsla(270,100%,60%,0.08);
+}
+
+/* ============================================
+   STICKY NAV WITH SCROLL BLUR
+   ============================================ */
+.nav-scrolled {
+  background: hsla(var(--background), 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: hsla(0, 0%, 100%, 0.06);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   SECTION GRADIENT DIVIDER
+   ============================================ */
+.section-gradient-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--cyan-accent)) 30%,
+    hsl(var(--purple-accent)) 70%,
+    transparent 100%
+  );
+  opacity: 0.3;
+}
+
+/* ============================================
+   TABLE ROW HOVER ACCENT
+   ============================================ */
+.table-row-hover {
+  transition: background 0.2s ease, border-color 0.2s ease;
+  border-left: 2px solid transparent;
+}
+.table-row-hover:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-left-color: hsl(var(--cyan-accent));
+}
+
+/* ============================================
+   SCROLL TO TOP FAB
+   ============================================ */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.scroll-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ============================================
+   MOBILE MENU OVERLAY
+   ============================================ */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: hsla(var(--background), 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================
+   USER-SPECIFIED LOAD ANIMATIONS
+   ============================================ */
 
 /* Nav: delay 0, y -20 */
 @keyframes fade-nav {
