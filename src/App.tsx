@@ -592,6 +592,15 @@ function MagneticCard() {
   );
 }
 
+const langLabels: Record<keyof typeof langData, string> = {
+  en: "EN",
+  zh: "中",
+  fr: "FR",
+  ja: "日",
+  ko: "한",
+  es: "ES",
+};
+
 export default function App() {
   const [activeLang, setActiveLang] = useState<keyof typeof langData>('en');
   const [searchQuery, setSearchQuery] = useState('');
@@ -914,7 +923,7 @@ export default function App() {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {lang}
+                {langLabels[lang]}
               </button>
             ))}
           </div>
