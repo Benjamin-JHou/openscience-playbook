@@ -401,7 +401,7 @@ Requisitos:
         code: `Analice los archivos CSV que contienen recuentos de RNA-seq y etiquetas clínicas en el espacio de trabajo.
 Directrices:
 1. Normalice los recuentos usando algoritmos estándar TPM/FPKM.
-2. Limpie los datos e impute variables faltantes con métodos estadísticos robustos.
+2. Limpie los datos e impute variables faltantes con métodos de estadísticas robustas.
 3. Ejecute un análisis de expresión génica diferencial (DGE) usando DESeq2.
 4. Genere gráficos de calidad para publicación: Volcano plot y Heatmap de los 50 genes principales.
 5. Guarde las figuras en figures/ y guarde el resumen en results/summary.md.`
@@ -469,6 +469,89 @@ const mcpServersList = [
   }
 ];
 
+// Interactive Magnetic Visual Showcase Card Component
+function MagneticCard() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    
+    // Calculate distance from cursor to center of card
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const dx = e.clientX - centerX;
+    const dy = e.clientY - centerY;
+    
+    // Threshold check (padding 150px)
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance < 150) {
+      setIsHovered(true);
+      // Magnetic strength: 3 (cursor coordinate offset divided by 3)
+      setPosition({ x: dx / 3, y: dy / 3 });
+    } else {
+      handleMouseLeave();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  // Active transition: transform 0.3s ease-out
+  // Inactive transition: transform 0.6s ease-in
+  const transitionStyle = isHovered 
+    ? "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)" 
+    : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
+
+  return (
+    <div 
+      className="relative flex justify-center items-center w-full min-h-[220px] sm:min-h-[280px]"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div 
+        className="absolute left-1/2 -translate-x-1/2 z-10 w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px] top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 animate-fade-portrait pointer-events-auto"
+        style={{ 
+          transform: `translate3d(calc(-50% + ${position.x}px), ${position.y}px, 0)`,
+          transition: transitionStyle
+        }}
+      >
+        {/* Showcase element with linear gradient borders and glows */}
+        <div className="gradient-border-glow p-[1.5px] rounded-3xl overflow-hidden shadow-2xl">
+          <div className="bg-[#000e1b] rounded-3xl p-6 md:p-8 flex flex-col justify-between h-44 sm:h-52 backdrop-blur-md">
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="text-[10px] font-mono tracking-widest text-cyan-accent uppercase bg-cyan-accent/10 px-2 py-0.5 rounded border border-cyan-accent/20">
+                  Active Session
+                </span>
+                <h3 className="text-lg md:text-xl font-normal text-white mt-3" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                  PubMed Core-Agent Engine
+                </h3>
+              </div>
+              <div className="h-2 w-2 rounded-full bg-cyan-accent animate-ping"></div>
+            </div>
+            
+            <div className="flex items-center gap-4 text-[10px] sm:text-xs font-mono text-muted-foreground border-t border-white/5 pt-4">
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-accent"></span>
+                <span>Literature: Syncing</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-purple-accent"></span>
+                <span>DGE Runs: 92%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [activeLang, setActiveLang] = useState<keyof typeof langData>('en');
   const [searchQuery, setSearchQuery] = useState('');
@@ -505,13 +588,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-white/20 selection:text-white pb-24 overflow-x-hidden font-body">
       
-      {/* Navigation Bar */}
-      <nav className="relative z-10 flex flex-row justify-between items-center px-8 py-6 max-w-7xl mx-auto border-b border-border/40">
+      {/* Navigation Bar: delay 0, y -20 */}
+      <nav className="relative z-10 flex flex-row justify-between items-center px-8 py-6 max-w-7xl mx-auto border-b border-border/40 animate-fade-nav">
+        {/* Project Branding Logo */}
         <div 
-          className="text-3xl tracking-tight text-foreground select-none"
+          className="text-2xl tracking-tight text-white select-none font-semibold"
           style={{ fontFamily: "'Instrument Serif', serif" }}
         >
-          Velorah<sup className="text-xs font-sans ml-0.5">®</sup>
+          Scientist.AI<sup className="text-xs font-sans ml-0.5 opacity-50">®</sup>
         </div>
         
         {/* Nav Links */}
@@ -523,7 +607,7 @@ export default function App() {
           <a href="#templates" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Templates</a>
         </div>
 
-        {/* CTA Button */}
+        {/* Contact CTA Button */}
         <button 
           onClick={() => {
             const el = document.getElementById('workbench');
@@ -536,37 +620,45 @@ export default function App() {
       </nav>
 
       {/* Cinematic Hero Section */}
-      <header className="relative flex flex-col justify-center items-center text-center px-6 min-h-[75vh] max-w-4xl mx-auto z-10">
+      <header className="relative flex flex-col justify-center items-center text-center px-6 min-h-[80vh] max-w-4xl mx-auto z-10">
         {/* Pulse Capsule Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/90 tracking-widest uppercase font-mono mb-8 animate-fade-rise">
-          <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse"></span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/95 tracking-widest uppercase font-mono mb-8 animate-fade-nav">
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-accent animate-pulse"></span>
           Autonomous Agent Directory & Setup Guide
         </div>
 
+        {/* Title: delay 0.15, y 40 with Linear Gradient text */}
         <h1 
-          className="text-6xl md:text-8xl tracking-tight leading-none mb-6 animate-fade-rise text-white font-normal"
+          className="text-6xl md:text-8xl tracking-tight leading-none mb-6 animate-fade-title font-normal bg-gradient-to-r from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent"
           style={{ fontFamily: "'Instrument Serif', serif" }}
         >
           AI-Scientist Playbook
         </h1>
         
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12 animate-fade-rise-delay leading-relaxed">
+        {/* Left Text / Subtitle: delay 0.35, y 20 */}
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12 animate-fade-text leading-relaxed">
           {t.subtitle}
         </p>
 
-        <div className="flex flex-row gap-4 animate-fade-rise-delay-2">
+        {/* Contact Button / CTA Section: delay 0.5, y 20 */}
+        <div className="flex flex-row gap-4 animate-fade-btn z-20">
           <a
             href="#ecosystem"
-            className="liquid-glass px-8 py-3.5 rounded-full text-sm font-medium transition-all duration-300 hover:scale-[1.03] text-foreground"
+            className="liquid-glass px-8 py-3.5 rounded-full text-sm font-medium transition-all duration-300 hover:scale-[1.03] text-foreground border border-white/10 hover:border-cyan-accent/50"
           >
             Explore Agent Ecosystem
           </a>
           <a
             href="#workbench"
-            className="bg-white text-[#000913] px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 hover:opacity-90 hover:scale-[1.03]"
+            className="bg-gradient-to-r from-cyan-accent to-purple-accent text-[#000913] px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 hover:opacity-90 hover:scale-[1.03]"
           >
             Open Interactive Console
           </a>
+        </div>
+
+        {/* Portrait / Showcase Card (with Magnet setup): delay 0.6, y 30 */}
+        <div className="w-full mt-10">
+          <MagneticCard />
         </div>
       </header>
 
@@ -574,23 +666,23 @@ export default function App() {
       <section className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <div className="p-5 rounded-2xl border border-border/30 bg-white/[0.01] hover:bg-white/[0.02] transition-colors flex flex-col items-center text-center">
-            <Dna className="h-6 w-6 text-muted-foreground mb-3" />
+            <Dna className="h-6 w-6 text-cyan-accent mb-3" />
             <h4 className="text-sm font-medium text-white">Genomics</h4>
           </div>
           <div className="p-5 rounded-2xl border border-border/30 bg-white/[0.01] hover:bg-white/[0.02] transition-colors flex flex-col items-center text-center">
-            <Beaker className="h-6 w-6 text-muted-foreground mb-3" />
+            <Beaker className="h-6 w-6 text-purple-accent mb-3" />
             <h4 className="text-sm font-medium text-white">Cheminformatics</h4>
           </div>
           <div className="p-5 rounded-2xl border border-border/30 bg-white/[0.01] hover:bg-white/[0.02] transition-colors flex flex-col items-center text-center">
-            <Stethoscope className="h-6 w-6 text-muted-foreground mb-3" />
+            <Stethoscope className="h-6 w-6 text-cyan-accent mb-3" />
             <h4 className="text-sm font-medium text-white">Clinical/Medicine</h4>
           </div>
           <div className="p-5 rounded-2xl border border-border/30 bg-white/[0.01] hover:bg-white/[0.02] transition-colors flex flex-col items-center text-center">
-            <TrendingUp className="h-6 w-6 text-muted-foreground mb-3" />
+            <TrendingUp className="h-6 w-6 text-purple-accent mb-3" />
             <h4 className="text-sm font-medium text-white">Econometrics</h4>
           </div>
           <div className="p-5 rounded-2xl border border-border/30 bg-white/[0.01] hover:bg-white/[0.02] transition-colors flex flex-col items-center text-center col-span-2 md:col-span-1">
-            <Map className="h-6 w-6 text-muted-foreground mb-3" />
+            <Map className="h-6 w-6 text-cyan-accent mb-3" />
             <h4 className="text-sm font-medium text-white">Geospatial</h4>
           </div>
         </div>
@@ -640,7 +732,7 @@ export default function App() {
               <span className="text-xs font-mono text-muted-foreground ml-4">ai_scientist_workspace.config</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground bg-white/5 px-3 py-1 rounded-md border border-border/30">
-              <Cpu className="h-3 w-3 text-green-400" /> Connected: Local-Sandbox
+              <Cpu className="h-3 w-3 text-cyan-accent" /> Connected: Local-Sandbox
             </div>
           </div>
 
@@ -657,12 +749,12 @@ export default function App() {
                   onClick={() => setActiveStepId(s.id)}
                   className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center justify-between ${
                     activeStepId === s.id
-                      ? "bg-white/10 text-white border-l-2 border-white pl-3.5"
+                      ? "bg-white/10 text-white border-l-2 border-cyan-accent pl-3.5"
                       : "text-muted-foreground hover:text-foreground hover:bg-white/5"
                   }`}
                 >
                   <span>{s.label}</span>
-                  {activeStepId === s.id && <Sparkles className="h-3.5 w-3.5 text-white" />}
+                  {activeStepId === s.id && <Sparkles className="h-3.5 w-3.5 text-cyan-accent" />}
                 </button>
               ))}
             </div>
@@ -693,13 +785,13 @@ export default function App() {
                 </div>
 
                 <div className="flex flex-row gap-4 mb-4">
-                  <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-white/5 px-2.5 py-1 rounded-md border border-border/30">
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-cyan-accent bg-cyan-accent/5 px-2.5 py-1 rounded-md border border-cyan-accent/20">
                     Recommended Skills: {currentStep.skills}
                   </div>
                 </div>
 
-                {/* Console text area */}
-                <div className="relative rounded-2xl border border-border/40 bg-black/40 overflow-hidden">
+                {/* Console text area with linear gradient accent border */}
+                <div className="relative rounded-2xl border border-border/45 bg-black/40 overflow-hidden">
                   <div className="flex flex-row font-mono text-xs leading-relaxed p-6 overflow-x-auto text-muted-foreground">
                     {/* Line numbers mockup */}
                     <div className="text-white/20 select-none text-right pr-6 border-r border-border/20 flex flex-col">
@@ -798,11 +890,11 @@ export default function App() {
               filteredAgents.map((agent, idx) => (
                 <div 
                   key={idx} 
-                  className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between min-h-[220px]"
+                  className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between min-h-[220px] hover:border-cyan-accent/30"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase bg-white/5 px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-mono tracking-widest text-cyan-accent uppercase bg-cyan-accent/5 px-2 py-0.5 rounded border border-cyan-accent/15">
                         {agent.category}
                       </span>
                       <span className="text-xs text-muted-foreground font-mono">{agent.release}</span>
@@ -822,7 +914,7 @@ export default function App() {
                       href={agent.url} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="text-xs font-semibold text-white flex items-center gap-1.5 hover:underline"
+                      className="text-xs font-semibold text-cyan-accent flex items-center gap-1.5 hover:underline"
                     >
                       Deploy <ExternalLink className="h-3 w-3" />
                     </a>
@@ -857,10 +949,10 @@ export default function App() {
                           href={agent.url} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="inline-flex items-center gap-1.5 hover:underline decoration-white/30"
+                          className="inline-flex items-center gap-1.5 text-cyan-accent hover:underline decoration-cyan-accent/30"
                         >
                           {agent.name}
-                          <ExternalLink className="h-3 w-3 opacity-50" />
+                          <ExternalLink className="h-3 w-3 opacity-80" />
                         </a>
                       </td>
                       <td className="py-4 px-6 text-muted-foreground">{agent.developer}</td>
@@ -901,7 +993,7 @@ export default function App() {
                 onClick={() => setActiveMcpId(m.id)}
                 className={`text-left p-5 rounded-2xl border transition-all flex flex-col justify-between ${
                   activeMcpId === m.id
-                    ? "border-white/50 bg-white/5 text-white"
+                    ? "border-cyan-accent bg-cyan-accent/5 text-white"
                     : "border-border/30 hover:border-white/20 hover:bg-white/[0.01] text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -909,15 +1001,15 @@ export default function App() {
                   <h4 className="text-sm font-semibold text-white">{m.name}</h4>
                   <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{m.desc}</p>
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono mt-4 text-white/40">
+                <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono mt-4 text-cyan-accent/60">
                   <Database className="h-3 w-3" /> Connector Node
                 </div>
               </button>
             ))}
           </div>
 
-          {/* Config viewer codeblock */}
-          <div className="lg:col-span-3 rounded-2xl border border-border/40 bg-black/40 p-6 flex flex-col justify-between">
+          {/* Config viewer codeblock: gradient border glow */}
+          <div className="lg:col-span-3 rounded-2xl border border-border/40 bg-black/40 p-6 flex flex-col justify-between relative">
             <div>
               <div className="flex justify-between items-center mb-4">
                 <span className="text-[10px] font-mono text-muted-foreground">mcp_config.json</span>
@@ -943,7 +1035,7 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-2 text-xs text-muted-foreground mt-6 pt-4 border-t border-border/10">
-              <ShieldCheck className="h-4 w-4 text-green-400" />
+              <ShieldCheck className="h-4 w-4 text-cyan-accent" />
               <span>Verified sandbox executable parameters.</span>
             </div>
           </div>
@@ -959,10 +1051,10 @@ export default function App() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* Template 1: literature_matrix_template.csv */}
-          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px]">
+          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-cyan-accent/30">
             <div>
               <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-border/50 mb-6">
-                <FileText className="h-6 w-6 text-white" />
+                <FileText className="h-6 w-6 text-cyan-accent" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">Literature Survey Matrix</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -974,9 +1066,9 @@ export default function App() {
               <a
                 href="templates/literature_matrix_template.csv"
                 download
-                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5"
+                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white"
               >
-                <Download className="h-3.5 w-3.5" /> Download CSV
+                <Download className="h-3.5 w-3.5 text-cyan-accent" /> Download CSV
               </a>
               <button
                 onClick={() => handleCopy("Paper Name,Year,Core Task,Datasets,Methodology,Performance Metrics,Findings,Limitations,DOI/PMID/arXiv ID", "csv")}
@@ -988,10 +1080,10 @@ export default function App() {
           </div>
 
           {/* Template 2: experiment_plan_template.md */}
-          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px]">
+          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-purple-accent/30">
             <div>
               <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-border/50 mb-6">
-                <BookOpen className="h-6 w-6 text-white" />
+                <BookOpen className="h-6 w-6 text-purple-accent" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">Experiment Plan Template</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -1003,9 +1095,9 @@ export default function App() {
               <a
                 href="templates/experiment_plan_template.md"
                 download
-                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5"
+                className="flex-1 text-center py-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-all text-xs font-semibold flex items-center justify-center gap-1.5 text-white"
               >
-                <Download className="h-3.5 w-3.5" /> Download MD
+                <Download className="h-3.5 w-3.5 text-purple-accent" /> Download MD
               </a>
               <button
                 onClick={() => handleCopy("# Scientific Experiment Plan\n- Hypothesis:\n- Datasets:\n- Models:\n- Run Logs:", "plan")}
@@ -1017,10 +1109,10 @@ export default function App() {
           </div>
 
           {/* Template 3: mcp_config_example.json */}
-          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px]">
+          <div className="p-6 rounded-3xl border border-border/40 bg-white/[0.01] glow-card flex flex-col justify-between h-[320px] hover:border-cyan-accent/30">
             <div>
               <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-border/50 mb-6">
-                <Terminal className="h-6 w-6 text-white" />
+                <Terminal className="h-6 w-6 text-cyan-accent" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">MCP Config Example</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -1039,7 +1131,7 @@ export default function App() {
                   </>
                 ) : (
                   <>
-                    <Copy className="h-3.5 w-3.5" /> Copy JSON Config
+                    <Copy className="h-3.5 w-3.5 text-cyan-accent" /> Copy JSON Config
                   </>
                 )}
               </button>
@@ -1048,7 +1140,7 @@ export default function App() {
                 download
                 className="p-2.5 rounded-xl border border-border/50 hover:bg-white/5 transition-colors text-muted-foreground hover:text-white"
               >
-                <Download className="h-4 w-4" />
+                <Download className="h-4 w-4 text-cyan-accent" />
               </a>
             </div>
           </div>
@@ -1059,7 +1151,7 @@ export default function App() {
       {/* Understated Cinematic Footer */}
       <footer id="footer" className="max-w-7xl mx-auto px-8 pt-24 pb-12 border-t border-border/20 mt-20 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-muted-foreground">
         <div>
-          <span className="text-white mr-1.5 font-semibold">Velorah®</span> 
+          <span className="text-white mr-1.5 font-semibold">Scientist.AI®</span> 
           <span>© 2026 Benjamin J. Hou. All rights reserved.</span>
         </div>
         
